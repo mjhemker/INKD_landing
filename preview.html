@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INKD - Where Ink Meets Inspiration</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #1E1E1E;
+            color: #FFFFFF;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, #1E1E1E 0%, #2A2A2A 50%, #1E1E1E 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            width: 100%;
+        }
+
+        .hero-brand {
+            font-size: 4rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #8A2BE2 0%, #9932CC 50%, #FFFFFF 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-tagline {
+            font-size: 1.5rem;
+            color: #CCCCCC;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: #AAAAAA;
+            margin-bottom: 2.5rem;
+            line-height: 1.7;
+        }
+
+        .btn {
+            padding: 18px 36px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-right: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #8A2BE2 0%, #9932CC 100%);
+            color: white;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(138, 43, 226, 0.3);
+        }
+
+        .btn-secondary {
+            background: rgba(138, 43, 226, 0.1);
+            color: #8A2BE2;
+            border: 2px solid #8A2BE2;
+        }
+
+        .phone-mockup {
+            width: 280px;
+            height: 560px;
+            background: linear-gradient(145deg, #2A2A2A, #1A1A1A);
+            border-radius: 35px;
+            padding: 12px;
+            margin: 0 auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1E1E1E 0%, #2A2A2A 100%);
+            border-radius: 25px;
+            padding: 60px 20px 20px;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 80px 0;
+            background: #1A1A1A;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #FFFFFF 0%, #8A2BE2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            font-size: 1.25rem;
+            text-align: center;
+            color: #CCCCCC;
+            margin-bottom: 4rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: rgba(42, 42, 42, 0.8);
+            border-radius: 16px;
+            border: 1px solid rgba(138, 43, 226, 0.1);
+            transition: all 0.4s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(138, 43, 226, 0.25);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #8A2BE2 0%, #9932CC 100%);
+            border-radius: 50%;
+        }
+
+        .feature-icon i {
+            font-size: 2rem;
+            color: white;
+        }
+
+        .feature-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .feature-description {
+            color: #CCCCCC;
+            line-height: 1.6;
+        }
+
+        /* Call to Action */
+        .cta {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #8A2BE2 0%, #9932CC 100%);
+            text-align: center;
+        }
+
+        .cta-title {
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+        }
+
+        .email-form {
+            max-width: 500px;
+            margin: 2rem auto;
+            display: flex;
+            background: white;
+            border-radius: 60px;
+            overflow: hidden;
+        }
+
+        .email-input {
+            flex: 1;
+            padding: 18px 24px;
+            border: none;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .email-btn {
+            padding: 18px 28px;
+            background: #1E1E1E;
+            color: white;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 4rem 0 2rem;
+            background: #0D0D0D;
+            color: #CCCCCC;
+            text-align: center;
+        }
+
+        .footer-brand {
+            font-size: 2rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #8A2BE2 0%, #9932CC 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 2rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .hero-brand {
+                font-size: 3rem;
+            }
+            
+            .section-title {
+                font-size: 2.5rem;
+            }
+            
+            .cta-title {
+                font-size: 2rem;
+            }
+            
+            .email-form {
+                flex-direction: column;
+                border-radius: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="hero-brand">INKD</h1>
+                    <p class="hero-tagline">Where Ink Meets Inspiration</p>
+                    <p class="hero-subtitle">
+                        Discover talented tattoo artists, book appointments seamlessly, and explore stunning portfolios all in one place.
+                    </p>
+                    <div class="hero-cta">
+                        <a href="#" class="btn btn-primary">
+                            <i class="fas fa-rocket"></i>
+                            Get Started
+                        </a>
+                        <a href="#" class="btn btn-secondary">
+                            <i class="fas fa-list"></i>
+                            Join Waitlist
+                        </a>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="phone-mockup">
+                        <div class="phone-screen">
+                            <div style="width: 50px; height: 50px; background: linear-gradient(135deg, #8A2BE2, #9932CC); border-radius: 25px; margin-bottom: 20px;"></div>
+                            <div style="width: 100%; height: 80px; background: rgba(138, 43, 226, 0.3); border-radius: 10px; margin-bottom: 10px;"></div>
+                            <div style="width: 100%; height: 80px; background: rgba(138, 43, 226, 0.2); border-radius: 10px;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">Why Choose INKD?</h2>
+            <p class="section-subtitle">
+                Everything you need to connect with the perfect tattoo artist and bring your vision to life.
+            </p>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-images"></i>
+                    </div>
+                    <h3 class="feature-title">Explore Portfolios</h3>
+                    <p class="feature-description">Browse stunning tattoo designs and artist portfolios to find your perfect match and inspiration.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <h3 class="feature-title">Book Appointments</h3>
+                    <p class="feature-description">Schedule appointments directly with artists through our seamless booking system.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3 class="feature-title">Find Nearby Artists</h3>
+                    <p class="feature-description">Discover talented tattoo artists in your area using our interactive map feature.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <h3 class="feature-title">AR Tattoo Preview</h3>
+                    <p class="feature-description">Use augmented reality to preview how tattoos will look on your skin before committing.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="cta">
+        <div class="container">
+            <h2 class="cta-title">Ready to Transform Your Tattoo Experience?</h2>
+            <p style="font-size: 1.25rem; margin-bottom: 2rem; opacity: 0.9;">
+                Join thousands of artists and clients who are already using INKD.
+            </p>
+            
+            <form class="email-form">
+                <input type="email" class="email-input" placeholder="Enter your email to join the waitlist" required>
+                <button type="submit" class="email-btn">
+                    <i class="fas fa-arrow-right"></i> Join Waitlist
+                </button>
+            </form>
+            
+            <div style="display: flex; justify-content: center; gap: 4rem; margin-top: 3rem;">
+                <div>
+                    <div style="font-size: 2.5rem; font-weight: 900;">10K+</div>
+                    <div>Artists Ready</div>
+                </div>
+                <div>
+                    <div style="font-size: 2.5rem; font-weight: 900;">50K+</div>
+                    <div>Clients Waiting</div>
+                </div>
+                <div>
+                    <div style="font-size: 2.5rem; font-weight: 900;">100+</div>
+                    <div>Cities Covered</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-brand">INKD</div>
+            <p>Where Ink Meets Inspiration</p>
+            <p style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.7;">
+                &copy; 2025 INKD. All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Simple form interaction
+        document.querySelector('.email-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = this.querySelector('.email-input').value;
+            if (email) {
+                alert('Thanks for joining the waitlist! We\'ll be in touch soon.');
+                this.querySelector('.email-input').value = '';
+            }
+        });
+
+        // Add smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

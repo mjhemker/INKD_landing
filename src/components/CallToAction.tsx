@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { IconPalette, IconBolt, IconRocket, IconArrowRight, IconCheck } from '@tabler/icons-react';
 import './CallToAction.css';
 
 const CallToAction: React.FC = () => {
@@ -67,12 +68,12 @@ const CallToAction: React.FC = () => {
                 >
                   {isSubmitted ? (
                     <>
-                      <i className="fas fa-check"></i>
+                      <IconCheck size={16} />
                       Added!
                     </>
                   ) : (
                     <>
-                      <i className="fas fa-arrow-right"></i>
+                      <IconArrowRight size={16} />
                       Join Waitlist
                     </>
                   )}
@@ -87,15 +88,15 @@ const CallToAction: React.FC = () => {
           
           <div className="cta-features">
             <div className="feature-item">
-              <span className="feature-icon">🎨</span>
+              <IconPalette size={20} className="feature-icon" />
               <span className="feature-text">Join the creative community</span>
             </div>
             <div className="feature-item">
-              <span className="feature-icon">⚡</span>
+              <IconBolt size={20} className="feature-icon" />
               <span className="feature-text">Be among the first to experience</span>
             </div>
             <div className="feature-item">
-              <span className="feature-icon">🚀</span>
+              <IconRocket size={20} className="feature-icon" />
               <span className="feature-text">Shape the future of tattoos</span>
             </div>
           </div>

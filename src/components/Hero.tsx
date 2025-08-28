@@ -1,4 +1,17 @@
 import React, { useEffect, useRef } from 'react';
+import { 
+  IconPalette, 
+  IconDeviceMobile, 
+  IconRobot, 
+  IconHeart, 
+  IconShare, 
+  IconCalendarEvent,
+  IconBolt,
+  IconTarget,
+  IconSparkles,
+  IconRocket,
+  IconBell
+} from '@tabler/icons-react';
 import './Hero.css';
 
 const Hero: React.FC = () => {
@@ -46,7 +59,8 @@ const Hero: React.FC = () => {
         <div className="hero-content">
           <div className="hero-text">
             <div className="hero-badge">
-              <span className="badge-text">✨ Revolutionary Tattoo Platform</span>
+              <IconSparkles size={16} />
+              <span className="badge-text">Revolutionary Tattoo Platform</span>
             </div>
             <h1 className="hero-title">
               <span className="hero-brand">
@@ -63,29 +77,29 @@ const Hero: React.FC = () => {
             </p>
             <div className="hero-stats">
               <div className="stat-item">
-                <span className="stat-icon">🎨</span>
+                <IconPalette size={20} className="stat-icon" />
                 <span className="stat-text">Curated Artists</span>
               </div>
               <div className="stat-item">
-                <span className="stat-icon">📱</span>
+                <IconDeviceMobile size={20} className="stat-icon" />
                 <span className="stat-text">Smart Booking</span>
               </div>
               <div className="stat-item">
-                <span className="stat-icon">🤖</span>
+                <IconRobot size={20} className="stat-icon" />
                 <span className="stat-text">AI Powered</span>
               </div>
             </div>
             <div className="hero-cta">
               <button className="btn btn-primary btn-large">
                 <span className="btn-content">
-                  <i className="fas fa-rocket"></i>
+                  <IconRocket size={20} />
                   Launch Experience
                 </span>
                 <div className="btn-glow"></div>
               </button>
               <button className="btn btn-secondary btn-large">
                 <span className="btn-content">
-                  <i className="fas fa-bell"></i>
+                  <IconBell size={20} />
                   Get Early Access
                 </span>
               </button>
@@ -126,13 +140,13 @@ const Hero: React.FC = () => {
                       </div>
                       <div className="mockup-actions">
                         <div className="action-btn">
-                          <i className="fas fa-heart"></i>
+                          <IconHeart size={16} />
                         </div>
                         <div className="action-btn">
-                          <i className="fas fa-share"></i>
+                          <IconShare size={16} />
                         </div>
                         <div className="action-btn primary">
-                          <i className="fas fa-calendar"></i>
+                          <IconCalendarEvent size={16} />
                         </div>
                       </div>
                     </div>
@@ -142,15 +156,15 @@ const Hero: React.FC = () => {
               
               <div className="floating-elements">
                 <div className="floating-card card-1">
-                  <div className="card-icon">⚡</div>
+                  <IconBolt size={20} className="card-icon" />
                   <div className="card-text">Instant Match</div>
                 </div>
                 <div className="floating-card card-2">
-                  <div className="card-icon">🎯</div>
+                  <IconTarget size={20} className="card-icon" />
                   <div className="card-text">Perfect Style</div>
                 </div>
                 <div className="floating-card card-3">
-                  <div className="card-icon">✨</div>
+                  <IconSparkles size={20} className="card-icon" />
                   <div className="card-text">AR Preview</div>
                 </div>
               </div>

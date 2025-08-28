@@ -131,7 +131,9 @@
 
 /* Hero Badge */
 .hero-badge {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   padding: 8px 20px;
   background: rgba(138, 43, 226, 0.15);
   border: 1px solid rgba(138, 43, 226, 0.3);
@@ -163,21 +165,23 @@
 
 .hero-brand {
   display: block;
-  font-size: 5rem;
+  font-size: 6.5rem;
   font-weight: 900;
   letter-spacing: -0.05em;
   margin-bottom: 1rem;
   perspective: 1000px;
+  text-shadow: 0 4px 20px rgba(138, 43, 226, 0.5);
 }
 
 .letter {
   display: inline-block;
-  background: linear-gradient(135deg, #8A2BE2 0%, #9932CC 50%, #FFFFFF 100%);
+  background: linear-gradient(135deg, #FFFFFF 0%, #8A2BE2 30%, #9932CC 70%, #FFFFFF 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   animation: letter-float 2s infinite ease-in-out;
   transform-style: preserve-3d;
+  filter: drop-shadow(0 2px 10px rgba(138, 43, 226, 0.6));
 }
 
 .letter:nth-child(1) { animation-delay: 0s; }
@@ -253,7 +257,8 @@
 }
 
 .stat-icon {
-  font-size: 1.2rem;
+  color: #8A2BE2;
+  filter: drop-shadow(0 2px 4px rgba(138, 43, 226, 0.3));
 }
 
 .stat-text {
@@ -665,7 +670,8 @@
 }
 
 .card-icon {
-  font-size: 1.2rem;
+  color: white;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
 }
 
 @keyframes shimmer {
@@ -680,7 +686,7 @@
   }
   
   .hero-brand {
-    font-size: 4.5rem;
+    font-size: 5.5rem;
   }
 }
 
@@ -690,7 +696,7 @@
   }
   
   .hero-brand {
-    font-size: 4rem;
+    font-size: 5rem;
   }
   
   .phone-frame {
@@ -712,7 +718,7 @@
   }
   
   .hero-brand {
-    font-size: 3.5rem;
+    font-size: 4.5rem;
   }
   
   .hero-tagline {
@@ -744,7 +750,7 @@
 
 @media (max-width: 480px) {
   .hero-brand {
-    font-size: 3rem;
+    font-size: 4rem;
   }
   
   .hero-cta {

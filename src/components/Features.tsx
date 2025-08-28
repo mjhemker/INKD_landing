@@ -1,4 +1,16 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { 
+  IconPalette, 
+  IconDeviceMobile, 
+  IconMapPin, 
+  IconEye,
+  IconSparkles,
+  IconRocket,
+  IconTarget,
+  IconBolt,
+  IconArrowRight,
+  IconStar
+} from '@tabler/icons-react';
 import './Features.css';
 
 const Features: React.FC = () => {
@@ -7,32 +19,32 @@ const Features: React.FC = () => {
 
   const features = [
     {
-      icon: '🎨',
-      emoji: '✨',
+      Icon: IconPalette,
+      accentIcon: IconSparkles,
       title: 'Curated Portfolios',
       description: 'Dive into handpicked collections of extraordinary tattoo artistry. Every artist is verified, every portfolio tells a story.',
       color: '#8A2BE2',
       gradient: 'linear-gradient(135deg, #8A2BE2, #9932CC)'
     },
     {
-      icon: '📱',
-      emoji: '🚀',
+      Icon: IconDeviceMobile,
+      accentIcon: IconRocket,
       title: 'Smart Booking',
       description: 'AI-powered scheduling that understands your preferences, availability, and connects you with the perfect artist at the right time.',
       color: '#9932CC',
       gradient: 'linear-gradient(135deg, #9932CC, #DA70D6)'
     },
     {
-      icon: '🗺️',
-      emoji: '🎯',
+      Icon: IconMapPin,
+      accentIcon: IconTarget,
       title: 'Artist Discovery',
       description: 'Explore a world of talent with our intelligent location-based matching. Find hidden gems and renowned artists alike.',
       color: '#DA70D6',
       gradient: 'linear-gradient(135deg, #DA70D6, #DDA0DD)'
     },
     {
-      icon: '🔮',
-      emoji: '⚡',
+      Icon: IconEye,
+      accentIcon: IconBolt,
       title: 'AR Visualization',
       description: 'Revolutionary augmented reality technology lets you preview your tattoo with stunning accuracy before you commit.',
       color: '#DDA0DD',
@@ -69,7 +81,8 @@ const Features: React.FC = () => {
       <div className="container">
         <div className="features-header">
           <div className="section-badge">
-            <span>🌟 Experience Excellence</span>
+            <IconStar size={16} />
+            <span>Experience Excellence</span>
           </div>
           <h2 className="section-title">Why Choose INKD?</h2>
           <p className="section-subtitle">
@@ -98,8 +111,8 @@ const Features: React.FC = () => {
               <div className="feature-content">
                 <div className="feature-icon-container">
                   <div className="feature-icon-bg"></div>
-                  <span className="feature-icon">{feature.icon}</span>
-                  <span className="feature-emoji">{feature.emoji}</span>
+                  <feature.Icon size={40} className="feature-icon" />
+                  <feature.accentIcon size={24} className="feature-emoji" />
                 </div>
                 
                 <div className="feature-text">
@@ -111,7 +124,7 @@ const Features: React.FC = () => {
                   <div className="feature-line"></div>
                   <button className="feature-learn-more">
                     <span>Explore</span>
-                    <i className="fas fa-arrow-right"></i>
+                    <IconArrowRight size={16} />
                   </button>
                 </div>
               </div>

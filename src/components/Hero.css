@@ -165,7 +165,7 @@
 
 .hero-brand {
   display: block;
-  font-size: 6.5rem;
+  font-size: 8rem;
   font-weight: 900;
   letter-spacing: -0.05em;
   margin-bottom: 1rem;
@@ -175,13 +175,13 @@
 
 .letter {
   display: inline-block;
-  background: linear-gradient(135deg, #FFFFFF 0%, #8A2BE2 30%, #9932CC 70%, #FFFFFF 100%);
+  background: linear-gradient(135deg, #FFFFFF 0%, #FFFFFF 15%, #8A2BE2 40%, #FFFFFF 85%, #FFFFFF 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   animation: letter-float 2s infinite ease-in-out;
   transform-style: preserve-3d;
-  filter: drop-shadow(0 2px 10px rgba(138, 43, 226, 0.6));
+  filter: drop-shadow(0 2px 15px rgba(255, 255, 255, 0.3)) drop-shadow(0 4px 20px rgba(138, 43, 226, 0.4));
 }
 
 .letter:nth-child(1) { animation-delay: 0s; }
@@ -686,7 +686,7 @@
   }
   
   .hero-brand {
-    font-size: 5.5rem;
+    font-size: 7rem;
   }
 }
 
@@ -696,7 +696,7 @@
   }
   
   .hero-brand {
-    font-size: 5rem;
+    font-size: 6rem;
   }
   
   .phone-frame {
@@ -718,7 +718,7 @@
   }
   
   .hero-brand {
-    font-size: 4.5rem;
+    font-size: 5rem;
   }
   
   .hero-tagline {
@@ -750,7 +750,7 @@
 
 @media (max-width: 480px) {
   .hero-brand {
-    font-size: 4rem;
+    font-size: 4.5rem;
   }
   
   .hero-cta {

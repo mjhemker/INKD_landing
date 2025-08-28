@@ -1,48 +1,148 @@
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import './Features.css';
 
 const Features: React.FC = () => {
+  const [hoveredFeature, setHoveredFeature] = useState<number | null>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+
   const features = [
     {
-      icon: 'fas fa-images',
-      title: 'Explore Portfolios',
-      description: 'Browse stunning tattoo designs and artist portfolios to find your perfect match and inspiration.'
+      icon: '🎨',
+      emoji: '✨',
+      title: 'Curated Portfolios',
+      description: 'Dive into handpicked collections of extraordinary tattoo artistry. Every artist is verified, every portfolio tells a story.',
+      color: '#8A2BE2',
+      gradient: 'linear-gradient(135deg, #8A2BE2, #9932CC)'
     },
     {
-      icon: 'fas fa-calendar-alt',
-      title: 'Book Appointments',
-      description: 'Schedule appointments directly with artists through our seamless booking system.'
+      icon: '📱',
+      emoji: '🚀',
+      title: 'Smart Booking',
+      description: 'AI-powered scheduling that understands your preferences, availability, and connects you with the perfect artist at the right time.',
+      color: '#9932CC',
+      gradient: 'linear-gradient(135deg, #9932CC, #DA70D6)'
     },
     {
-      icon: 'fas fa-map-marker-alt',
-      title: 'Find Nearby Artists',
-      description: 'Discover talented tattoo artists in your area using our interactive map feature.'
+      icon: '🗺️',
+      emoji: '🎯',
+      title: 'Artist Discovery',
+      description: 'Explore a world of talent with our intelligent location-based matching. Find hidden gems and renowned artists alike.',
+      color: '#DA70D6',
+      gradient: 'linear-gradient(135deg, #DA70D6, #DDA0DD)'
     },
     {
-      icon: 'fas fa-eye',
-      title: 'AR Tattoo Preview',
-      description: 'Use augmented reality to preview how tattoos will look on your skin before committing.'
+      icon: '🔮',
+      emoji: '⚡',
+      title: 'AR Visualization',
+      description: 'Revolutionary augmented reality technology lets you preview your tattoo with stunning accuracy before you commit.',
+      color: '#DDA0DD',
+      gradient: 'linear-gradient(135deg, #DDA0DD, #8A2BE2)'
     }
   ];
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-in');
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    const featureCards = document.querySelectorAll('.feature-card');
+    featureCards.forEach((card) => observer.observe(card));
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section className="features section">
+    <section className="features section" ref={sectionRef}>
+      <div className="features-background">
+        <div className="floating-orb orb-1"></div>
+        <div className="floating-orb orb-2"></div>
+        <div className="floating-orb orb-3"></div>
+      </div>
+      
       <div className="container">
-        <h2 className="section-title">Why Choose INKD?</h2>
-        <p className="section-subtitle">
-          Everything you need to connect with the perfect tattoo artist and bring your vision to life.
-        </p>
+        <div className="features-header">
+          <div className="section-badge">
+            <span>🌟 Experience Excellence</span>
+          </div>
+          <h2 className="section-title">Why Choose INKD?</h2>
+          <p className="section-subtitle">
+            Revolutionary technology meets artistic mastery. Every feature designed to transform your tattoo journey.
+          </p>
+        </div>
         
         <div className="features-grid">
           {features.map((feature, index) => (
-            <div key={index} className="feature-card card">
-              <div className="feature-icon">
-                <i className={feature.icon}></i>
+            <div 
+              key={index} 
+              className={`feature-card ${hoveredFeature === index ? 'hovered' : ''}`}
+              onMouseEnter={() => setHoveredFeature(index)}
+              onMouseLeave={() => setHoveredFeature(null)}
+              style={{'--feature-color': feature.color, '--feature-gradient': feature.gradient} as React.CSSProperties}
+            >
+              <div className="feature-background">
+                <div className="feature-glow"></div>
+                <div className="feature-particles">
+                  <div className="particle"></div>
+                  <div className="particle"></div>
+                  <div className="particle"></div>
+                </div>
               </div>
-              <h3 className="feature-title">{feature.title}</h3>
-              <p className="feature-description">{feature.description}</p>
+              
+              <div className="feature-content">
+                <div className="feature-icon-container">
+                  <div className="feature-icon-bg"></div>
+                  <span className="feature-icon">{feature.icon}</span>
+                  <span className="feature-emoji">{feature.emoji}</span>
+                </div>
+                
+                <div className="feature-text">
+                  <h3 className="feature-title">{feature.title}</h3>
+                  <p className="feature-description">{feature.description}</p>
+                </div>
+                
+                <div className="feature-footer">
+                  <div className="feature-line"></div>
+                  <button className="feature-learn-more">
+                    <span>Explore</span>
+                    <i className="fas fa-arrow-right"></i>
+                  </button>
+                </div>
+              </div>
             </div>
           ))}
+        </div>
+        
+        <div className="features-bottom">
+          <div className="connection-lines">
+            <svg viewBox="0 0 800 200" className="connections-svg">
+              <path 
+                d="M200,100 Q400,50 600,100" 
+                stroke="url(#connectionGradient)" 
+                strokeWidth="2" 
+                fill="none"
+                className="connection-path"
+              />
+              <defs>
+                <linearGradient id="connectionGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="#8A2BE2" stopOpacity="0.3"/>
+                  <stop offset="50%" stopColor="#9932CC" stopOpacity="0.6"/>
+                  <stop offset="100%" stopColor="#8A2BE2" stopOpacity="0.3"/>
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+          
+          <p className="features-tagline">
+            <span className="tagline-highlight">Seamlessly connected.</span> 
+            <span> Intelligently designed. Beautifully crafted.</span>
+          </p>
         </div>
       </div>
     </section>

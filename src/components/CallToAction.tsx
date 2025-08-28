@@ -85,18 +85,18 @@ const CallToAction: React.FC = () => {
             </p>
           </form>
           
-          <div className="cta-stats">
-            <div className="stat">
-              <span className="stat-number">10K+</span>
-              <span className="stat-label">Artists Ready</span>
+          <div className="cta-features">
+            <div className="feature-item">
+              <span className="feature-icon">🎨</span>
+              <span className="feature-text">Join the creative community</span>
             </div>
-            <div className="stat">
-              <span className="stat-number">50K+</span>
-              <span className="stat-label">Clients Waiting</span>
+            <div className="feature-item">
+              <span className="feature-icon">⚡</span>
+              <span className="feature-text">Be among the first to experience</span>
             </div>
-            <div className="stat">
-              <span className="stat-number">100+</span>
-              <span className="stat-label">Cities Covered</span>
+            <div className="feature-item">
+              <span className="feature-icon">🚀</span>
+              <span className="feature-text">Shape the future of tattoos</span>
             </div>
           </div>
         </div>

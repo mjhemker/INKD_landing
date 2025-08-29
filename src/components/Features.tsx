@@ -98,6 +98,8 @@ const Features: React.FC = () => {
         <div className="floating-ink-drop drop-2"></div>
         <div className="floating-ink-drop drop-3"></div>
         <div className="floating-ink-drop drop-4"></div>
+        <div className="ink-splotch splotch-1"></div>
+        <div className="ink-splotch splotch-2"></div>
         <div className="features-line-work">
           <svg className="features-lines" viewBox="0 0 1400 1000" xmlns="http://www.w3.org/2000/svg">
             <defs>
@@ -178,7 +180,7 @@ const Features: React.FC = () => {
           {/* Client Side - Left */}
           <div className="split-side client-side">
             <div className="side-background">
-              <img src="/swallow.svg" alt="" className="side-tattoo-design client-tattoo-1" />
+              <img src="/swallow.svg" alt="" className="side-tattoo-design client-tattoo-1" style={{'--base-rotation': '-15deg'} as React.CSSProperties} />
             </div>
             <div className="side-content">
               <div className="side-header">
@@ -219,7 +221,7 @@ const Features: React.FC = () => {
           {/* Artist Side - Right */}
           <div className="split-side artist-side">
             <div className="side-background">
-              <img src="/rose.svg" alt="" className="side-tattoo-design artist-tattoo-1" />
+              <img src="/rose.svg" alt="" className="side-tattoo-design artist-tattoo-1" style={{'--base-rotation': '20deg'} as React.CSSProperties} />
             </div>
             <div className="side-content">
               <div className="side-header">

@@ -17,17 +17,29 @@
   background: linear-gradient(135deg, rgba(138, 43, 226, 0.12), rgba(153, 50, 204, 0.08));
   backdrop-filter: blur(60px);
   animation: float-features-drop 18s infinite ease-in-out;
-  border-radius: 50% 50% 50% 0;
+  border-radius: 85% 15% 85% 15% / 70% 15% 85% 30%;
 }
 
 .floating-ink-drop::before {
   content: '';
   position: absolute;
-  top: -8px;
+  top: -10px;
+  left: 65%;
+  width: 8px;
+  height: 8px;
+  background: linear-gradient(135deg, rgba(138, 43, 226, 0.3), rgba(153, 50, 204, 0.3));
+  border-radius: 50%;
+  transform: translateX(-50%);
+}
+
+.floating-ink-drop::after {
+  content: '';
+  position: absolute;
+  top: -4px;
   left: 50%;
-  width: 12px;
-  height: 12px;
-  background: linear-gradient(135deg, rgba(138, 43, 226, 0.2), rgba(153, 50, 204, 0.2));
+  width: 4px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.15);
   border-radius: 50%;
   transform: translateX(-50%);
 }
@@ -76,6 +88,60 @@
   50% {
     transform: translateY(-15px) scale(1.03);
     opacity: 0.15;
+  }
+}
+
+/* Morphing Ink Splotches */
+.ink-splotch {
+  position: absolute;
+  background: linear-gradient(45deg, rgba(138, 43, 226, 0.06), rgba(153, 50, 204, 0.04));
+  backdrop-filter: blur(100px);
+  border-radius: 45% 55% 35% 65% / 30% 60% 40% 70%;
+  animation: splotch-morph 25s infinite ease-in-out;
+  transform-origin: center;
+}
+
+.splotch-1 {
+  width: 400px;
+  height: 350px;
+  top: 20%;
+  left: 10%;
+  animation-delay: 0s;
+}
+
+.splotch-2 {
+  width: 320px;
+  height: 380px;
+  bottom: 10%;
+  right: 15%;
+  animation-delay: 12s;
+}
+
+@keyframes splotch-morph {
+  0%, 100% {
+    border-radius: 45% 55% 35% 65% / 30% 60% 40% 70%;
+    transform: translate(0, 0) rotate(0deg) scale(1);
+    opacity: 0.06;
+  }
+  20% {
+    border-radius: 35% 65% 45% 55% / 60% 30% 70% 40%;
+    transform: translate(-10px, -15px) rotate(5deg) scale(1.15);
+    opacity: 0.1;
+  }
+  40% {
+    border-radius: 65% 35% 55% 45% / 40% 70% 30% 60%;
+    transform: translate(15px, -8px) rotate(-3deg) scale(0.9);
+    opacity: 0.12;
+  }
+  60% {
+    border-radius: 55% 45% 65% 35% / 70% 40% 60% 30%;
+    transform: translate(-5px, 12px) rotate(8deg) scale(1.08);
+    opacity: 0.08;
+  }
+  80% {
+    border-radius: 40% 60% 30% 70% / 50% 70% 30% 50%;
+    transform: translate(8px, -5px) rotate(-2deg) scale(0.95);
+    opacity: 0.09;
   }
 }
 
@@ -165,36 +231,43 @@
 /* Side Tattoo Designs */
 .side-tattoo-design {
   position: absolute;
-  opacity: 0.55;
-  filter: drop-shadow(0 4px 16px rgba(0, 0, 0, 0.3));
-  animation: side-tattoo-float 20s infinite ease-in-out;
+  opacity: 0.6;
+  filter: drop-shadow(0 6px 20px rgba(0, 0, 0, 0.4));
+  animation: side-tattoo-float 25s infinite ease-in-out;
   pointer-events: none;
+  transform-origin: center;
 }
 
 .client-tattoo-1 {
-  width: 200px;
-  height: 200px;
-  top: 20%;
-  right: 8%;
+  width: 380px;
+  height: 380px;
+  top: -10%;
+  right: -20%;
   animation-delay: 0s;
+  transform: rotate(-15deg);
 }
 
 .artist-tattoo-1 {
-  width: 220px;
-  height: 220px;
-  top: 25%;
-  left: 5%;
-  animation-delay: 5s;
+  width: 420px;
+  height: 420px;
+  top: -15%;
+  left: -25%;
+  animation-delay: 8s;
+  transform: rotate(20deg);
 }
 
 @keyframes side-tattoo-float {
   0%, 100% {
-    transform: translateY(0) rotate(0deg) scale(1);
-    opacity: 0.55;
-  }
-  50% {
-    transform: translateY(-5px) rotate(1deg) scale(1.01);
+    transform: translateY(0) rotate(var(--base-rotation, 0deg)) scale(1);
     opacity: 0.6;
+  }
+  25% {
+    transform: translateY(-8px) rotate(calc(var(--base-rotation, 0deg) + 2deg)) scale(1.02);
+    opacity: 0.65;
+  }
+  75% {
+    transform: translateY(5px) rotate(calc(var(--base-rotation, 0deg) - 1deg)) scale(0.98);
+    opacity: 0.55;
   }
 }
 
@@ -884,13 +957,31 @@
   }
   
   .client-tattoo-1 {
-    width: 120px;
-    height: 120px;
+    width: 200px;
+    height: 200px;
+    top: -5%;
+    right: -10%;
   }
   
   .artist-tattoo-1 {
-    width: 130px;
-    height: 130px;
+    width: 220px;
+    height: 220px;
+    top: -8%;
+    left: -12%;
+  }
+  
+  .ink-splotch {
+    opacity: 0.04;
+  }
+  
+  .splotch-1 {
+    width: 250px;
+    height: 220px;
+  }
+  
+  .splotch-2 {
+    width: 200px;
+    height: 240px;
   }
   
   .connection-lines {

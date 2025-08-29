@@ -54,6 +54,9 @@ const Hero: React.FC = () => {
           <div className="ink-drop ink-drop-4"></div>
           <div className="ink-drop ink-drop-5"></div>
           <div className="ink-drop ink-drop-6"></div>
+          <div className="morphing-blob blob-1"></div>
+          <div className="morphing-blob blob-2"></div>
+          <div className="morphing-blob blob-3"></div>
         </div>
         <div className="line-work">
           <svg className="hero-lines" viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">

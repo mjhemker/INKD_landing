@@ -67,18 +67,30 @@
   background: linear-gradient(135deg, rgba(138, 43, 226, 0.15), rgba(153, 50, 204, 0.12));
   backdrop-filter: blur(40px);
   animation: float-ink-drop 12s infinite ease-in-out;
-  border-radius: 50% 50% 50% 0;
+  border-radius: 80% 20% 80% 20% / 60% 20% 80% 40%;
   transform-origin: center;
 }
 
 .ink-drop::before {
   content: '';
   position: absolute;
-  top: -5px;
-  left: 50%;
-  width: 8px;
-  height: 8px;
-  background: linear-gradient(135deg, rgba(138, 43, 226, 0.3), rgba(153, 50, 204, 0.3));
+  top: -8px;
+  left: 60%;
+  width: 6px;
+  height: 6px;
+  background: linear-gradient(135deg, rgba(138, 43, 226, 0.4), rgba(153, 50, 204, 0.4));
+  border-radius: 50%;
+  transform: translateX(-50%);
+}
+
+.ink-drop::after {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: 45%;
+  width: 3px;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.2);
   border-radius: 50%;
   transform: translateX(-50%);
 }
@@ -144,6 +156,63 @@
   50% {
     transform: translateY(-8px) scale(1.05);
     opacity: 0.18;
+  }
+}
+
+/* Morphing Ink Blobs */
+.morphing-blob {
+  position: absolute;
+  background: linear-gradient(135deg, rgba(138, 43, 226, 0.08), rgba(153, 50, 204, 0.05));
+  backdrop-filter: blur(80px);
+  border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  animation: morph-blob 20s infinite ease-in-out;
+  transform-origin: center;
+}
+
+.blob-1 {
+  width: 280px;
+  height: 320px;
+  top: 10%;
+  right: 5%;
+  animation-delay: 0s;
+}
+
+.blob-2 {
+  width: 220px;
+  height: 260px;
+  bottom: 15%;
+  left: 8%;
+  animation-delay: 7s;
+}
+
+.blob-3 {
+  width: 180px;
+  height: 200px;
+  top: 60%;
+  right: 15%;
+  animation-delay: 14s;
+}
+
+@keyframes morph-blob {
+  0%, 100% {
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    transform: translate(0, 0) scale(1);
+    opacity: 0.08;
+  }
+  25% {
+    border-radius: 30% 70% 60% 40% / 40% 60% 30% 70%;
+    transform: translate(-5px, -8px) scale(1.1);
+    opacity: 0.12;
+  }
+  50% {
+    border-radius: 70% 30% 40% 60% / 70% 40% 60% 30%;
+    transform: translate(8px, -3px) scale(0.95);
+    opacity: 0.15;
+  }
+  75% {
+    border-radius: 40% 60% 70% 30% / 30% 70% 40% 60%;
+    transform: translate(-3px, 10px) scale(1.05);
+    opacity: 0.1;
   }
 }
 

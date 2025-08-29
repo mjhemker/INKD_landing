@@ -203,6 +203,61 @@
   }
 }
 
+/* Features Line Work */
+.features-line-work {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.features-lines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.7;
+}
+
+.connection-line {
+  animation: connection-flow 8s infinite linear;
+}
+
+.geometric-shape {
+  animation: geometric-float 12s infinite ease-in-out;
+}
+
+.curve-line {
+  stroke-dasharray: 10 5;
+  animation: curve-animate 10s infinite linear;
+}
+
+@keyframes connection-flow {
+  0% { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: 150; }
+}
+
+@keyframes geometric-float {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(1) rotate(0deg);
+  }
+  33% {
+    opacity: 0.7;
+    transform: scale(1.05) rotate(120deg);
+  }
+  66% {
+    opacity: 0.5;
+    transform: scale(0.95) rotate(240deg);
+  }
+}
+
+@keyframes curve-animate {
+  0% { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: 75; }
+}
+
 .client-side .side-background {
   --side-color: rgba(138, 43, 226, 0.15);
 }
@@ -672,8 +727,31 @@
 }
 
 .connection-path {
-  stroke-dasharray: 10 5;
-  animation: dash-flow 3s infinite linear;
+  stroke-dasharray: inherit;
+  animation: dash-flow 4s infinite linear;
+}
+
+.connection-path.secondary {
+  animation-delay: 2s;
+}
+
+.decorative-circle {
+  animation: circle-breathe 6s infinite ease-in-out;
+}
+
+.decorative-circle.small {
+  animation-delay: 3s;
+}
+
+@keyframes circle-breathe {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.2);
+  }
 }
 
 @keyframes dash-flow {

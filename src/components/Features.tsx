@@ -97,6 +97,67 @@ const Features: React.FC = () => {
         <div className="floating-orb orb-1"></div>
         <div className="floating-orb orb-2"></div>
         <div className="floating-orb orb-3"></div>
+        <div className="features-line-work">
+          <svg className="features-lines" viewBox="0 0 1400 1000" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="splitGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="rgba(138, 43, 226, 0.4)" />
+                <stop offset="45%" stopColor="rgba(138, 43, 226, 0.6)" />
+                <stop offset="55%" stopColor="rgba(153, 50, 204, 0.6)" />
+                <stop offset="100%" stopColor="rgba(153, 50, 204, 0.4)" />
+              </linearGradient>
+            </defs>
+            
+            {/* Connecting lines between sections */}
+            <path 
+              d="M0,200 L1400,180" 
+              stroke="url(#splitGradient)" 
+              strokeWidth="1" 
+              strokeDasharray="15 10"
+              fill="none"
+              className="connection-line"
+            />
+            <path 
+              d="M0,800 L1400,820" 
+              stroke="url(#splitGradient)" 
+              strokeWidth="1" 
+              strokeDasharray="20 8"
+              fill="none"
+              className="connection-line"
+            />
+            
+            {/* Geometric shapes */}
+            <rect 
+              x="100" 
+              y="100" 
+              width="60" 
+              height="60" 
+              stroke="rgba(138, 43, 226, 0.4)" 
+              strokeWidth="1"
+              strokeDasharray="4 2"
+              fill="none"
+              transform="rotate(45 130 130)"
+              className="geometric-shape"
+            />
+            <polygon 
+              points="1200,150 1250,200 1200,250 1150,200" 
+              stroke="rgba(153, 50, 204, 0.5)" 
+              strokeWidth="1.5"
+              strokeDasharray="8 5"
+              fill="none"
+              className="geometric-shape"
+            />
+            
+            {/* Curved connecting elements */}
+            <path 
+              d="M300,400 Q500,300 700,400 Q900,500 1100,400" 
+              stroke="rgba(138, 43, 226, 0.3)" 
+              strokeWidth="1" 
+              fill="none"
+              className="curve-line"
+            />
+          </svg>
+        </div>
       </div>
       
       <div className="container">
@@ -193,20 +254,49 @@ const Features: React.FC = () => {
         <div className="features-bottom">
           <div className="connection-lines">
             <svg viewBox="0 0 800 200" className="connections-svg">
+              <defs>
+                <linearGradient id="connectionGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="#8A2BE2" stopOpacity="0.4"/>
+                  <stop offset="50%" stopColor="#9932CC" stopOpacity="0.7"/>
+                  <stop offset="100%" stopColor="#8A2BE2" stopOpacity="0.4"/>
+                </linearGradient>
+              </defs>
               <path 
                 d="M200,100 Q400,50 600,100" 
                 stroke="url(#connectionGradient)" 
                 strokeWidth="2" 
+                strokeDasharray="12 6"
                 fill="none"
                 className="connection-path"
               />
-              <defs>
-                <linearGradient id="connectionGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor="#8A2BE2" stopOpacity="0.3"/>
-                  <stop offset="50%" stopColor="#9932CC" stopOpacity="0.6"/>
-                  <stop offset="100%" stopColor="#8A2BE2" stopOpacity="0.3"/>
-                </linearGradient>
-              </defs>
+              <path 
+                d="M100,150 Q400,120 700,150" 
+                stroke="rgba(138, 43, 226, 0.3)" 
+                strokeWidth="1" 
+                strokeDasharray="8 4"
+                fill="none"
+                className="connection-path secondary"
+              />
+              <circle 
+                cx="150" 
+                cy="100" 
+                r="25" 
+                stroke="rgba(153, 50, 204, 0.4)" 
+                strokeWidth="1"
+                strokeDasharray="6 3"
+                fill="none"
+                className="decorative-circle"
+              />
+              <circle 
+                cx="650" 
+                cy="130" 
+                r="15" 
+                stroke="rgba(138, 43, 226, 0.5)" 
+                strokeWidth="1"
+                strokeDasharray="4 2"
+                fill="none"
+                className="decorative-circle small"
+              />
             </svg>
           </div>
           

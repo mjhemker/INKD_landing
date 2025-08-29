@@ -24,6 +24,50 @@ const CallToAction: React.FC = () => {
         <div className="cta-shape shape-1"></div>
         <div className="cta-shape shape-2"></div>
         <div className="cta-shape shape-3"></div>
+        <div className="cta-line-work">
+          <svg className="cta-lines" viewBox="0 0 1200 600" xmlns="http://www.w3.org/2000/svg">
+            <path 
+              d="M0,300 Q300,200 600,300 Q900,400 1200,300" 
+              stroke="rgba(138, 43, 226, 0.3)" 
+              strokeWidth="1" 
+              strokeDasharray="10 5"
+              fill="none"
+              className="cta-flow-line"
+            />
+            <path 
+              d="M100,150 L1100,150" 
+              stroke="rgba(153, 50, 204, 0.2)" 
+              strokeWidth="0.5" 
+              strokeDasharray="20 15"
+              fill="none"
+              className="cta-horizon-line"
+            />
+            <path 
+              d="M100,450 L1100,450" 
+              stroke="rgba(138, 43, 226, 0.2)" 
+              strokeWidth="0.5" 
+              strokeDasharray="25 10"
+              fill="none"
+              className="cta-horizon-line bottom"
+            />
+            <polygon 
+              points="200,100 220,120 200,140 180,120" 
+              stroke="rgba(138, 43, 226, 0.4)" 
+              strokeWidth="1"
+              strokeDasharray="3 2"
+              fill="none"
+              className="cta-accent-shape diamond-1"
+            />
+            <polygon 
+              points="1000,500 1020,520 1000,540 980,520" 
+              stroke="rgba(153, 50, 204, 0.4)" 
+              strokeWidth="1"
+              strokeDasharray="3 2"
+              fill="none"
+              className="cta-accent-shape diamond-2"
+            />
+          </svg>
+        </div>
       </div>
       
       <div className="container">

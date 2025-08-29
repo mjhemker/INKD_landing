@@ -57,6 +57,51 @@ const Hero: React.FC = () => {
           <img src="/rose.svg" alt="" className="tattoo-design tattoo-rose" />
           <img src="/swallow.svg" alt="" className="tattoo-design tattoo-swallow" />
         </div>
+        <div className="line-work">
+          <svg className="hero-lines" viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="lineGradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="rgba(138, 43, 226, 0.6)" />
+                <stop offset="50%" stopColor="rgba(153, 50, 204, 0.8)" />
+                <stop offset="100%" stopColor="rgba(138, 43, 226, 0.4)" />
+              </linearGradient>
+            </defs>
+            <path 
+              d="M100,200 Q300,100 500,200 T900,150" 
+              stroke="url(#lineGradient1)" 
+              strokeWidth="1.5" 
+              strokeDasharray="8 4"
+              fill="none"
+              className="animated-line line-1"
+            />
+            <path 
+              d="M200,600 Q400,500 600,600 T1000,550" 
+              stroke="rgba(138, 43, 226, 0.4)" 
+              strokeWidth="1" 
+              strokeDasharray="12 6"
+              fill="none"
+              className="animated-line line-2"
+            />
+            <circle 
+              cx="150" 
+              cy="300" 
+              r="80" 
+              stroke="rgba(153, 50, 204, 0.3)" 
+              strokeWidth="1"
+              strokeDasharray="5 3"
+              fill="none"
+              className="animated-circle circle-1"
+            />
+            <polygon 
+              points="900,300 950,350 900,400 850,350" 
+              stroke="rgba(138, 43, 226, 0.5)" 
+              strokeWidth="1.5"
+              strokeDasharray="6 4"
+              fill="none"
+              className="animated-shape shape-diamond"
+            />
+          </svg>
+        </div>
       </div>
       
       <div className="container">

@@ -24,6 +24,10 @@ const CallToAction: React.FC = () => {
         <div className="cta-shape shape-1"></div>
         <div className="cta-shape shape-2"></div>
         <div className="cta-shape shape-3"></div>
+        <div className="cta-tattoo-designs">
+          <img src="/snake_dagger.svg" alt="" className="cta-tattoo-design cta-snake" />
+          <img src="/tat_machine.svg" alt="" className="cta-tattoo-design cta-machine" />
+        </div>
         <div className="cta-line-work">
           <svg className="cta-lines" viewBox="0 0 1200 600" xmlns="http://www.w3.org/2000/svg">
             <path 

@@ -53,10 +53,6 @@ const Hero: React.FC = () => {
           <div className="shape shape-3"></div>
           <div className="shape shape-4"></div>
         </div>
-        <div className="tattoo-designs">
-          <img src="/rose.svg" alt="" className="tattoo-design tattoo-rose" />
-          <img src="/swallow.svg" alt="" className="tattoo-design tattoo-swallow" />
-        </div>
         <div className="line-work">
           <svg className="hero-lines" viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
             <defs>

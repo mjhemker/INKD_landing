@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import Hero from './components/Hero';
 import Features from './components/Features';
+import LocalDemo from './components/LocalDemo';
 import HowItWorks from './components/HowItWorks';
 import Screenshots from './components/Screenshots';
 import AIAssistant from './components/AIAssistant';
@@ -13,6 +14,7 @@ function App() {
     <div className="App">
       <Hero />
       <Features />
+      <LocalDemo />
       <HowItWorks />
       <Screenshots />
       <AIAssistant />

@@ -58,10 +58,6 @@ const Hero: React.FC = () => {
       <div className="container">
         <div className="hero-content">
           <div className="hero-text">
-            <div className="hero-badge">
-              <IconSparkles size={16} />
-              <span className="badge-text">Revolutionary Tattoo Platform</span>
-            </div>
             <h1 className="hero-title">
               <span className="hero-brand">
                 <span className="letter">I</span>
@@ -97,7 +93,7 @@ const Hero: React.FC = () => {
                 </span>
                 <div className="btn-glow"></div>
               </button>
-              <button className="btn btn-secondary btn-large">
+              <button className="btn btn-secondary btn-large" onClick={() => window.open('https://forms.gle/YourWaitlistFormId', '_blank')}>
                 <span className="btn-content">
                   <IconBell size={20} />
                   Get Early Access
@@ -166,6 +162,9 @@ const Hero: React.FC = () => {
                 <div className="floating-card card-3">
                   <IconSparkles size={20} className="card-icon" />
                   <div className="card-text">AR Preview</div>
+                </div>
+                <div className="floating-droplet">
+                  <img src="/rain-droplet.svg" alt="" className="droplet-svg" />
                 </div>
               </div>
             </div>

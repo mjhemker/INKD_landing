@@ -58,6 +58,8 @@ const Features: React.FC = () => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add('animate-in');
+          } else {
+            entry.target.classList.remove('animate-in');
           }
         });
       },

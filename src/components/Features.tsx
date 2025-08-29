@@ -111,101 +111,76 @@ const Features: React.FC = () => {
           </p>
         </div>
         
-        {/* Client Features Section */}
-        <div className="user-section">
-          <div className="user-section-header">
-            <h3 className="user-section-title">For Tattoo Enthusiasts</h3>
-            <p className="user-section-subtitle">Discover, visualize, and book with local artists</p>
-          </div>
-          <div className="features-grid">
-            {clientFeatures.map((feature, index) => (
-              <div 
-                key={`client-${index}`} 
-                className={`feature-card ${hoveredFeature === index ? 'hovered' : ''}`}
-                onMouseEnter={() => setHoveredFeature(index)}
-                onMouseLeave={() => setHoveredFeature(null)}
-                style={{'--feature-color': feature.color, '--feature-gradient': feature.gradient} as React.CSSProperties}
-              >
-                <div className="feature-background">
-                  <div className="feature-glow"></div>
-                  <div className="feature-particles">
-                    <div className="particle"></div>
-                    <div className="particle"></div>
-                    <div className="particle"></div>
-                  </div>
-                </div>
-                
-                <div className="feature-content">
-                  <div className="feature-icon-container">
-                    <div className="feature-icon-bg"></div>
-                    <feature.Icon size={40} className="feature-icon" />
-                    <feature.accentIcon size={24} className="feature-emoji" />
-                  </div>
-                  
-                  <div className="feature-text">
-                    <h3 className="feature-title">{feature.title}</h3>
-                    <p className="feature-description">{feature.description}</p>
-                  </div>
-                  
-                  <div className="feature-footer">
-                    <div className="feature-line"></div>
-                    <button className="feature-learn-more">
-                      <span>Explore</span>
-                      <IconArrowRight size={16} />
-                    </button>
-                  </div>
-                </div>
+        {/* Split Screen Layout */}
+        <div className="split-container">
+          {/* Client Side - Left */}
+          <div className="split-side client-side">
+            <div className="side-background"></div>
+            <div className="side-content">
+              <div className="side-header">
+                <h3 className="side-title">For Tattoo Enthusiasts</h3>
+                <p className="side-subtitle">Discover, visualize, and book with local artists</p>
               </div>
-            ))}
-          </div>
-        </div>
-        
-        {/* Artist Features Section */}
-        <div className="user-section">
-          <div className="user-section-header">
-            <h3 className="user-section-title">For Tattoo Artists</h3>
-            <p className="user-section-subtitle">Showcase your work, manage your business, and connect with local clients</p>
-          </div>
-          <div className="features-grid">
-            {artistFeatures.map((feature, index) => (
-              <div 
-                key={`artist-${index}`} 
-                className={`feature-card ${hoveredFeature === (index + 10) ? 'hovered' : ''}`}
-                onMouseEnter={() => setHoveredFeature(index + 10)}
-                onMouseLeave={() => setHoveredFeature(null)}
-                style={{'--feature-color': feature.color, '--feature-gradient': feature.gradient} as React.CSSProperties}
-              >
-                <div className="feature-background">
-                  <div className="feature-glow"></div>
-                  <div className="feature-particles">
-                    <div className="particle"></div>
-                    <div className="particle"></div>
-                    <div className="particle"></div>
+              
+              <div className="side-features">
+                {clientFeatures.map((feature, index) => (
+                  <div 
+                    key={`client-${index}`} 
+                    className={`split-feature-card ${hoveredFeature === index ? 'hovered' : ''}`}
+                    onMouseEnter={() => setHoveredFeature(index)}
+                    onMouseLeave={() => setHoveredFeature(null)}
+                    style={{'--feature-color': feature.color, '--feature-gradient': feature.gradient} as React.CSSProperties}
+                  >
+                    <div className="split-card-icon">
+                      <feature.Icon size={28} />
+                    </div>
+                    <div className="split-card-content">
+                      <h4 className="split-card-title">{feature.title}</h4>
+                      <p className="split-card-description">{feature.description}</p>
+                    </div>
                   </div>
-                </div>
-                
-                <div className="feature-content">
-                  <div className="feature-icon-container">
-                    <div className="feature-icon-bg"></div>
-                    <feature.Icon size={40} className="feature-icon" />
-                    <feature.accentIcon size={24} className="feature-emoji" />
-                  </div>
-                  
-                  <div className="feature-text">
-                    <h3 className="feature-title">{feature.title}</h3>
-                    <p className="feature-description">{feature.description}</p>
-                  </div>
-                  
-                  <div className="feature-footer">
-                    <div className="feature-line"></div>
-                    <button className="feature-learn-more">
-                      <span>Explore</span>
-                      <IconArrowRight size={16} />
-                    </button>
-                  </div>
-                </div>
+                ))}
               </div>
-            ))}
+            </div>
+          </div>
+          
+          {/* Divider */}
+          <div className="split-divider">
+            <div className="divider-line"></div>
+            <div className="divider-icon">
+              <IconSparkles size={24} />
+            </div>
+          </div>
+          
+          {/* Artist Side - Right */}
+          <div className="split-side artist-side">
+            <div className="side-background"></div>
+            <div className="side-content">
+              <div className="side-header">
+                <h3 className="side-title">For Tattoo Artists</h3>
+                <p className="side-subtitle">Showcase your work, manage your business, and connect with local clients</p>
+              </div>
+              
+              <div className="side-features">
+                {artistFeatures.map((feature, index) => (
+                  <div 
+                    key={`artist-${index}`} 
+                    className={`split-feature-card ${hoveredFeature === (index + 10) ? 'hovered' : ''}`}
+                    onMouseEnter={() => setHoveredFeature(index + 10)}
+                    onMouseLeave={() => setHoveredFeature(null)}
+                    style={{'--feature-color': feature.color, '--feature-gradient': feature.gradient} as React.CSSProperties}
+                  >
+                    <div className="split-card-icon">
+                      <feature.Icon size={28} />
+                    </div>
+                    <div className="split-card-content">
+                      <h4 className="split-card-title">{feature.title}</h4>
+                      <p className="split-card-description">{feature.description}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
         

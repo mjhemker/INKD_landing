@@ -160,7 +160,7 @@ const LocalDemo: React.FC = () => {
             <div className="map-header">
               <div className="map-location">
                 <IconMapPin size={20} />
-                <span>San Francisco, CA</span>
+                <span>Philadelphia, PA</span>
               </div>
               <div className="map-stats">
                 <span>{artists.filter(a => a.isOnline).length} artists online</span>
@@ -181,10 +181,11 @@ const LocalDemo: React.FC = () => {
 
                 {/* Neighborhoods */}
                 <div className="neighborhoods">
-                  <div className="neighborhood mission" style={{top: '60%', left: '20%'}}>Mission</div>
-                  <div className="neighborhood soma" style={{top: '45%', left: '45%'}}>SOMA</div>
-                  <div className="neighborhood castro" style={{top: '55%', left: '35%'}}>Castro</div>
-                  <div className="neighborhood haight" style={{top: '35%', left: '25%'}}>Haight</div>
+                  <div className="neighborhood" style={{top: '45%', left: '30%'}}>Center City</div>
+                  <div className="neighborhood" style={{top: '60%', left: '25%'}}>South Philly</div>
+                  <div className="neighborhood" style={{top: '35%', left: '45%'}}>Northern Liberties</div>
+                  <div className="neighborhood" style={{top: '55%', left: '55%'}}>Fishtown</div>
+                  <div className="neighborhood" style={{top: '30%', left: '20%'}}>Fairmount</div>
                 </div>
 
                 {/* Artist markers */}
@@ -202,7 +203,6 @@ const LocalDemo: React.FC = () => {
                   >
                     <div className="marker-pulse"></div>
                     <div className="marker-icon">
-                      <IconPalette size={16} />
                     </div>
                     {hoveredArtist?.id === artist.id && (
                       <div className="marker-tooltip">

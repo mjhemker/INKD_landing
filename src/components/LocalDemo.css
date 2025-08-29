@@ -168,6 +168,9 @@
   position: relative;
   height: 500px;
   background: linear-gradient(135deg, #2A2A2A 0%, #1E1E1E 100%);
+  border: 2px solid rgba(138, 43, 226, 0.2);
+  border-radius: 16px;
+  overflow: hidden;
 }
 
 .map-background {
@@ -175,6 +178,12 @@
   width: 100%;
   height: 100%;
   overflow: hidden;
+  background-image: 
+    radial-gradient(circle at 25% 25%, rgba(138, 43, 226, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 75% 75%, rgba(153, 50, 204, 0.08) 0%, transparent 50%),
+    linear-gradient(45deg, rgba(255, 255, 255, 0.02) 25%, transparent 25%),
+    linear-gradient(-45deg, rgba(255, 255, 255, 0.02) 25%, transparent 25%);
+  background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
 }
 
 /* Street Grid */
@@ -220,7 +229,7 @@
 /* Artist Markers */
 .artist-marker {
   position: absolute;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -100%);
   cursor: pointer;
   z-index: 10;
 }
@@ -230,25 +239,25 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 40px;
-  height: 40px;
-  background: rgba(138, 43, 226, 0.3);
+  width: 50px;
+  height: 50px;
+  background: rgba(138, 43, 226, 0.2);
   border-radius: 50%;
   animation: marker-pulse 2s infinite ease-in-out;
 }
 
 .artist-marker.offline .marker-pulse {
-  background: rgba(128, 128, 128, 0.3);
+  background: rgba(128, 128, 128, 0.2);
   animation: none;
 }
 
 @keyframes marker-pulse {
   0%, 100% {
     transform: translate(-50%, -50%) scale(1);
-    opacity: 0.7;
+    opacity: 0.6;
   }
   50% {
-    transform: translate(-50%, -50%) scale(1.5);
+    transform: translate(-50%, -50%) scale(1.8);
     opacity: 0;
   }
 }
@@ -256,17 +265,28 @@
 .marker-icon {
   position: relative;
   z-index: 2;
-  width: 36px;
-  height: 36px;
+  width: 32px;
+  height: 40px;
   background: linear-gradient(135deg, #8A2BE2, #9932CC);
-  border-radius: 50%;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
-  border: 3px solid rgba(255, 255, 255, 0.9);
+  border: 2px solid rgba(255, 255, 255, 0.9);
   box-shadow: 0 4px 12px rgba(138, 43, 226, 0.4);
   transition: all 0.3s ease;
+}
+
+.marker-icon::before {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: white;
+  border-radius: 50%;
+  transform: rotate(45deg);
 }
 
 .artist-marker.offline .marker-icon {
@@ -276,14 +296,14 @@
 
 .artist-marker:hover .marker-icon,
 .artist-marker.hovered .marker-icon {
-  transform: scale(1.2);
+  transform: rotate(-45deg) scale(1.2);
   box-shadow: 0 6px 20px rgba(138, 43, 226, 0.6);
 }
 
 /* Marker Tooltip */
 .marker-tooltip {
   position: absolute;
-  bottom: 50px;
+  bottom: 55px;
   left: 50%;
   transform: translateX(-50%);
   background: rgba(26, 26, 26, 0.95);
@@ -442,14 +462,15 @@
 
 .artist-card {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 1rem;
-  padding: 1rem;
+  padding: 1.25rem;
   border-radius: 16px;
   border: 1px solid transparent;
   cursor: pointer;
   transition: all 0.3s ease;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
+  min-height: 90px;
 }
 
 .artist-card:hover {
@@ -514,19 +535,26 @@
 .artist-info {
   flex: 1;
   min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .artist-name {
   font-weight: 600;
   color: #FFFFFF;
-  font-size: 0.95rem;
-  margin-bottom: 2px;
+  font-size: 1rem;
+  margin: 0;
+  line-height: 1.3;
 }
 
 .artist-specialty {
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   color: #CCCCCC;
-  margin-bottom: 6px;
+  margin: 0;
+  line-height: 1.4;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
 .artist-stats {
@@ -547,9 +575,11 @@
 }
 
 .artist-rate {
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   color: #8A2BE2;
   font-weight: 600;
+  align-self: flex-start;
+  margin-top: 0.25rem;
 }
 
 /* Artist Modal */

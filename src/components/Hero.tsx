@@ -68,13 +68,13 @@ const Hero: React.FC = () => {
               <span className="hero-tagline">Where Ink Meets Inspiration</span>
             </h1>
             <p className="hero-subtitle">
-              The ultimate platform connecting tattoo enthusiasts with world-class artists. 
-              Discover portfolios, book seamlessly, and bring your vision to life with cutting-edge AR technology.
+              The ultimate local platform connecting tattoo enthusiasts with nearby world-class artists. 
+              Discover local portfolios, book seamlessly with artists in your area, and bring your vision to life with cutting-edge AR technology.
             </p>
             <div className="hero-stats">
               <div className="stat-item">
                 <IconPalette size={20} className="stat-icon" />
-                <span className="stat-text">Curated Artists</span>
+                <span className="stat-text">Local Artists</span>
               </div>
               <div className="stat-item">
                 <IconDeviceMobile size={20} className="stat-icon" />
@@ -93,7 +93,7 @@ const Hero: React.FC = () => {
                 </span>
                 <div className="btn-glow"></div>
               </button>
-              <button className="btn btn-secondary btn-large" onClick={() => window.open('https://forms.gle/YourWaitlistFormId', '_blank')}>
+              <button className="btn btn-secondary btn-large" onClick={() => document.querySelector('.call-to-action')?.scrollIntoView({ behavior: 'smooth' })}>
                 <span className="btn-content">
                   <IconBell size={20} />
                   Get Early Access
@@ -162,9 +162,6 @@ const Hero: React.FC = () => {
                 <div className="floating-card card-3">
                   <IconSparkles size={20} className="card-icon" />
                   <div className="card-text">AR Preview</div>
-                </div>
-                <div className="floating-droplet">
-                  <img src="/rain-droplet.svg" alt="" className="droplet-svg" />
                 </div>
               </div>
             </div>

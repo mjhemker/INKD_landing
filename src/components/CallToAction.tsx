@@ -28,9 +28,9 @@ const CallToAction: React.FC = () => {
       
       <div className="container">
         <div className="cta-content">
-          <h2 className="cta-title">Ready to Transform Your Tattoo Experience?</h2>
+          <h2 className="cta-title">Ready to Transform Your Local Tattoo Experience?</h2>
           <p className="cta-subtitle">
-            Join thousands of artists and clients who are already using INKD to create amazing tattoo experiences.
+            Join thousands of local artists and clients who are already using INKD to create amazing tattoo experiences in their communities.
           </p>
           
           <div className="user-type-selector">

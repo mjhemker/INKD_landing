@@ -17,12 +17,12 @@ const Features: React.FC = () => {
   const [hoveredFeature, setHoveredFeature] = useState<number | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
 
-  const features = [
+  const clientFeatures = [
     {
-      Icon: IconPalette,
-      accentIcon: IconSparkles,
-      title: 'Curated Portfolios',
-      description: 'Dive into handpicked collections of extraordinary tattoo artistry. Every artist is verified, every portfolio tells a story.',
+      Icon: IconMapPin,
+      accentIcon: IconTarget,
+      title: 'Local Artist Discovery',
+      description: 'Find talented artists in your area with our intelligent location-based matching. Discover hidden gems and renowned artists nearby.',
       color: '#8A2BE2',
       gradient: 'linear-gradient(135deg, #8A2BE2, #9932CC)'
     },
@@ -30,25 +30,44 @@ const Features: React.FC = () => {
       Icon: IconDeviceMobile,
       accentIcon: IconRocket,
       title: 'Smart Booking',
-      description: 'AI-powered scheduling that understands your preferences, availability, and connects you with the perfect artist at the right time.',
+      description: 'Effortless scheduling that matches your availability with local artists. Book consultations and sessions with just a few taps.',
       color: '#9932CC',
       gradient: 'linear-gradient(135deg, #9932CC, #DA70D6)'
-    },
-    {
-      Icon: IconMapPin,
-      accentIcon: IconTarget,
-      title: 'Artist Discovery',
-      description: 'Explore a world of talent with our intelligent location-based matching. Find hidden gems and renowned artists alike.',
-      color: '#DA70D6',
-      gradient: 'linear-gradient(135deg, #DA70D6, #DDA0DD)'
     },
     {
       Icon: IconEye,
       accentIcon: IconBolt,
       title: 'AR Visualization',
-      description: 'Revolutionary augmented reality technology lets you preview your tattoo with stunning accuracy before you commit.',
-      color: '#DDA0DD',
-      gradient: 'linear-gradient(135deg, #DDA0DD, #8A2BE2)'
+      description: 'See your tattoo before you get it with revolutionary augmented reality technology. Preview designs on your actual body.',
+      color: '#DA70D6',
+      gradient: 'linear-gradient(135deg, #DA70D6, #DDA0DD)'
+    }
+  ];
+
+  const artistFeatures = [
+    {
+      Icon: IconPalette,
+      accentIcon: IconSparkles,
+      title: 'Portfolio Showcase',
+      description: 'Create stunning digital portfolios that attract local clients. Showcase your best work with high-quality galleries and detailed descriptions.',
+      color: '#8A2BE2',
+      gradient: 'linear-gradient(135deg, #8A2BE2, #9932CC)'
+    },
+    {
+      Icon: IconRocket,
+      accentIcon: IconStar,
+      title: 'AI Business Assistant',
+      description: 'Smart assistant helps manage appointments, client communications, and business operations. Focus on your art while AI handles the admin.',
+      color: '#9932CC',
+      gradient: 'linear-gradient(135deg, #9932CC, #DA70D6)'
+    },
+    {
+      Icon: IconTarget,
+      accentIcon: IconBolt,
+      title: 'Client Management',
+      description: 'Streamlined tools for managing client relationships, tracking consultations, and handling payments. Everything you need to run your business.',
+      color: '#DA70D6',
+      gradient: 'linear-gradient(135deg, #DA70D6, #DDA0DD)'
     }
   ];
 
@@ -88,50 +107,106 @@ const Features: React.FC = () => {
           </div>
           <h2 className="section-title">Why Choose INKD?</h2>
           <p className="section-subtitle">
-            Revolutionary technology meets artistic mastery. Every feature designed to transform your tattoo journey.
+            Revolutionary local technology meets artistic mastery. Every feature designed to transform your tattoo journey.
           </p>
         </div>
         
-        <div className="features-grid">
-          {features.map((feature, index) => (
-            <div 
-              key={index} 
-              className={`feature-card ${hoveredFeature === index ? 'hovered' : ''}`}
-              onMouseEnter={() => setHoveredFeature(index)}
-              onMouseLeave={() => setHoveredFeature(null)}
-              style={{'--feature-color': feature.color, '--feature-gradient': feature.gradient} as React.CSSProperties}
-            >
-              <div className="feature-background">
-                <div className="feature-glow"></div>
-                <div className="feature-particles">
-                  <div className="particle"></div>
-                  <div className="particle"></div>
-                  <div className="particle"></div>
-                </div>
-              </div>
-              
-              <div className="feature-content">
-                <div className="feature-icon-container">
-                  <div className="feature-icon-bg"></div>
-                  <feature.Icon size={40} className="feature-icon" />
-                  <feature.accentIcon size={24} className="feature-emoji" />
-                </div>
-                
-                <div className="feature-text">
-                  <h3 className="feature-title">{feature.title}</h3>
-                  <p className="feature-description">{feature.description}</p>
+        {/* Client Features Section */}
+        <div className="user-section">
+          <div className="user-section-header">
+            <h3 className="user-section-title">For Tattoo Enthusiasts</h3>
+            <p className="user-section-subtitle">Discover, visualize, and book with local artists</p>
+          </div>
+          <div className="features-grid">
+            {clientFeatures.map((feature, index) => (
+              <div 
+                key={`client-${index}`} 
+                className={`feature-card ${hoveredFeature === index ? 'hovered' : ''}`}
+                onMouseEnter={() => setHoveredFeature(index)}
+                onMouseLeave={() => setHoveredFeature(null)}
+                style={{'--feature-color': feature.color, '--feature-gradient': feature.gradient} as React.CSSProperties}
+              >
+                <div className="feature-background">
+                  <div className="feature-glow"></div>
+                  <div className="feature-particles">
+                    <div className="particle"></div>
+                    <div className="particle"></div>
+                    <div className="particle"></div>
+                  </div>
                 </div>
                 
-                <div className="feature-footer">
-                  <div className="feature-line"></div>
-                  <button className="feature-learn-more">
-                    <span>Explore</span>
-                    <IconArrowRight size={16} />
-                  </button>
+                <div className="feature-content">
+                  <div className="feature-icon-container">
+                    <div className="feature-icon-bg"></div>
+                    <feature.Icon size={40} className="feature-icon" />
+                    <feature.accentIcon size={24} className="feature-emoji" />
+                  </div>
+                  
+                  <div className="feature-text">
+                    <h3 className="feature-title">{feature.title}</h3>
+                    <p className="feature-description">{feature.description}</p>
+                  </div>
+                  
+                  <div className="feature-footer">
+                    <div className="feature-line"></div>
+                    <button className="feature-learn-more">
+                      <span>Explore</span>
+                      <IconArrowRight size={16} />
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
+        </div>
+        
+        {/* Artist Features Section */}
+        <div className="user-section">
+          <div className="user-section-header">
+            <h3 className="user-section-title">For Tattoo Artists</h3>
+            <p className="user-section-subtitle">Showcase your work, manage your business, and connect with local clients</p>
+          </div>
+          <div className="features-grid">
+            {artistFeatures.map((feature, index) => (
+              <div 
+                key={`artist-${index}`} 
+                className={`feature-card ${hoveredFeature === (index + 10) ? 'hovered' : ''}`}
+                onMouseEnter={() => setHoveredFeature(index + 10)}
+                onMouseLeave={() => setHoveredFeature(null)}
+                style={{'--feature-color': feature.color, '--feature-gradient': feature.gradient} as React.CSSProperties}
+              >
+                <div className="feature-background">
+                  <div className="feature-glow"></div>
+                  <div className="feature-particles">
+                    <div className="particle"></div>
+                    <div className="particle"></div>
+                    <div className="particle"></div>
+                  </div>
+                </div>
+                
+                <div className="feature-content">
+                  <div className="feature-icon-container">
+                    <div className="feature-icon-bg"></div>
+                    <feature.Icon size={40} className="feature-icon" />
+                    <feature.accentIcon size={24} className="feature-emoji" />
+                  </div>
+                  
+                  <div className="feature-text">
+                    <h3 className="feature-title">{feature.title}</h3>
+                    <p className="feature-description">{feature.description}</p>
+                  </div>
+                  
+                  <div className="feature-footer">
+                    <div className="feature-line"></div>
+                    <button className="feature-learn-more">
+                      <span>Explore</span>
+                      <IconArrowRight size={16} />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
         
         <div className="features-bottom">

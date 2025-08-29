@@ -62,55 +62,88 @@
   height: 100%;
 }
 
-.shape {
+.ink-drop {
   position: absolute;
-  border-radius: 50%;
-  background: linear-gradient(135deg, rgba(138, 43, 226, 0.1), rgba(153, 50, 204, 0.1));
+  background: linear-gradient(135deg, rgba(138, 43, 226, 0.15), rgba(153, 50, 204, 0.12));
   backdrop-filter: blur(40px);
-  animation: float-shape 8s infinite ease-in-out;
+  animation: float-ink-drop 12s infinite ease-in-out;
+  border-radius: 50% 50% 50% 0;
+  transform-origin: center;
 }
 
-.shape-1 {
-  width: 300px;
-  height: 300px;
-  top: 10%;
-  left: -5%;
+.ink-drop::before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  background: linear-gradient(135deg, rgba(138, 43, 226, 0.3), rgba(153, 50, 204, 0.3));
+  border-radius: 50%;
+  transform: translateX(-50%);
+}
+
+.ink-drop-1 {
+  width: 120px;
+  height: 150px;
+  top: 15%;
+  left: 8%;
   animation-delay: 0s;
 }
 
-.shape-2 {
-  width: 200px;
-  height: 200px;
-  top: 60%;
-  right: -3%;
-  animation-delay: 2s;
-}
-
-.shape-3 {
-  width: 150px;
-  height: 150px;
-  bottom: 20%;
-  left: 10%;
-  animation-delay: 4s;
-}
-
-.shape-4 {
-  width: 100px;
+.ink-drop-2 {
+  width: 80px;
   height: 100px;
-  top: 30%;
-  right: 20%;
-  animation-delay: 6s;
+  top: 45%;
+  right: 12%;
+  animation-delay: 2s;
+  transform: rotate(45deg);
 }
 
-@keyframes float-shape {
+.ink-drop-3 {
+  width: 100px;
+  height: 125px;
+  bottom: 25%;
+  left: 15%;
+  animation-delay: 4s;
+  transform: rotate(-30deg);
+}
+
+.ink-drop-4 {
+  width: 60px;
+  height: 75px;
+  top: 25%;
+  right: 25%;
+  animation-delay: 6s;
+  transform: rotate(120deg);
+}
+
+.ink-drop-5 {
+  width: 90px;
+  height: 110px;
+  bottom: 45%;
+  right: 8%;
+  animation-delay: 8s;
+  transform: rotate(-60deg);
+}
+
+.ink-drop-6 {
+  width: 70px;
+  height: 85px;
+  top: 65%;
+  left: 5%;
+  animation-delay: 10s;
+  transform: rotate(90deg);
+}
+
+@keyframes float-ink-drop {
   0%, 100% {
-    transform: translateY(0) rotate(0deg) scale(1);
+    transform: translateY(0) scale(1);
+    opacity: 0.12;
   }
-  33% {
-    transform: translateY(-20px) rotate(120deg) scale(1.1);
-  }
-  66% {
-    transform: translateY(10px) rotate(240deg) scale(0.9);
+  50% {
+    transform: translateY(-8px) scale(1.05);
+    opacity: 0.18;
   }
 }
 

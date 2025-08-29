@@ -21,9 +21,9 @@ const CallToAction: React.FC = () => {
   return (
     <section className="call-to-action section">
       <div className="cta-background">
-        <div className="cta-shape shape-1"></div>
-        <div className="cta-shape shape-2"></div>
-        <div className="cta-shape shape-3"></div>
+        <div className="cta-ink-drop cta-drop-1"></div>
+        <div className="cta-ink-drop cta-drop-2"></div>
+        <div className="cta-ink-drop cta-drop-3"></div>
         <div className="cta-tattoo-designs">
           <img src="/snake_dagger.svg" alt="" className="cta-tattoo-design cta-snake" />
           <img src="/tat_machine.svg" alt="" className="cta-tattoo-design cta-machine" />

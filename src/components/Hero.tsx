@@ -48,10 +48,12 @@ const Hero: React.FC = () => {
       <div className="particles-container" ref={particlesRef}></div>
       <div className="hero-background">
         <div className="floating-shapes">
-          <div className="shape shape-1"></div>
-          <div className="shape shape-2"></div>
-          <div className="shape shape-3"></div>
-          <div className="shape shape-4"></div>
+          <div className="ink-drop ink-drop-1"></div>
+          <div className="ink-drop ink-drop-2"></div>
+          <div className="ink-drop ink-drop-3"></div>
+          <div className="ink-drop ink-drop-4"></div>
+          <div className="ink-drop ink-drop-5"></div>
+          <div className="ink-drop ink-drop-6"></div>
         </div>
         <div className="line-work">
           <svg className="hero-lines" viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">

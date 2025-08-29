@@ -94,9 +94,10 @@ const Features: React.FC = () => {
   return (
     <section className="features section" ref={sectionRef}>
       <div className="features-background">
-        <div className="floating-orb orb-1"></div>
-        <div className="floating-orb orb-2"></div>
-        <div className="floating-orb orb-3"></div>
+        <div className="floating-ink-drop drop-1"></div>
+        <div className="floating-ink-drop drop-2"></div>
+        <div className="floating-ink-drop drop-3"></div>
+        <div className="floating-ink-drop drop-4"></div>
         <div className="features-line-work">
           <svg className="features-lines" viewBox="0 0 1400 1000" xmlns="http://www.w3.org/2000/svg">
             <defs>

@@ -12,51 +12,70 @@
   pointer-events: none;
 }
 
-.floating-orb {
+.floating-ink-drop {
   position: absolute;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(138, 43, 226, 0.15) 0%, transparent 70%);
+  background: linear-gradient(135deg, rgba(138, 43, 226, 0.12), rgba(153, 50, 204, 0.08));
   backdrop-filter: blur(60px);
-  animation: float-orb 20s infinite ease-in-out;
+  animation: float-features-drop 18s infinite ease-in-out;
+  border-radius: 50% 50% 50% 0;
 }
 
-.orb-1 {
-  width: 400px;
-  height: 400px;
-  top: -200px;
-  left: -100px;
-  animation-delay: 0s;
-}
-
-.orb-2 {
-  width: 300px;
-  height: 300px;
-  bottom: -150px;
-  right: -50px;
-  animation-delay: 7s;
-}
-
-.orb-3 {
-  width: 250px;
-  height: 250px;
-  top: 50%;
+.floating-ink-drop::before {
+  content: '';
+  position: absolute;
+  top: -8px;
   left: 50%;
-  transform: translate(-50%, -50%);
-  animation-delay: 14s;
+  width: 12px;
+  height: 12px;
+  background: linear-gradient(135deg, rgba(138, 43, 226, 0.2), rgba(153, 50, 204, 0.2));
+  border-radius: 50%;
+  transform: translateX(-50%);
 }
 
-@keyframes float-orb {
+.drop-1 {
+  width: 200px;
+  height: 250px;
+  top: -100px;
+  left: -50px;
+  animation-delay: 0s;
+  transform: rotate(15deg);
+}
+
+.drop-2 {
+  width: 150px;
+  height: 190px;
+  bottom: -80px;
+  right: -30px;
+  animation-delay: 6s;
+  transform: rotate(-45deg);
+}
+
+.drop-3 {
+  width: 120px;
+  height: 150px;
+  top: 40%;
+  left: -40px;
+  animation-delay: 12s;
+  transform: rotate(75deg);
+}
+
+.drop-4 {
+  width: 180px;
+  height: 220px;
+  bottom: 30%;
+  right: -60px;
+  animation-delay: 9s;
+  transform: rotate(-20deg);
+}
+
+@keyframes float-features-drop {
   0%, 100% {
-    transform: translate(0, 0) scale(1);
-    opacity: 0.3;
+    transform: translateY(0) scale(1);
+    opacity: 0.08;
   }
-  33% {
-    transform: translate(30px, -40px) scale(1.1);
-    opacity: 0.5;
-  }
-  66% {
-    transform: translate(-20px, 30px) scale(0.9);
-    opacity: 0.7;
+  50% {
+    transform: translateY(-15px) scale(1.03);
+    opacity: 0.15;
   }
 }
 

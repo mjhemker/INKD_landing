@@ -115,7 +115,10 @@ const Features: React.FC = () => {
         <div className="split-container">
           {/* Client Side - Left */}
           <div className="split-side client-side">
-            <div className="side-background"></div>
+            <div className="side-background">
+              <img src="/swallow.svg" alt="" className="side-tattoo-design client-tattoo-1" />
+              <img src="/tat_machine.svg" alt="" className="side-tattoo-design client-tattoo-2" />
+            </div>
             <div className="side-content">
               <div className="side-header">
                 <h3 className="side-title">For Tattoo Enthusiasts</h3>
@@ -154,7 +157,10 @@ const Features: React.FC = () => {
           
           {/* Artist Side - Right */}
           <div className="split-side artist-side">
-            <div className="side-background"></div>
+            <div className="side-background">
+              <img src="/rose.svg" alt="" className="side-tattoo-design artist-tattoo-1" />
+              <img src="/snake_dagger.svg" alt="" className="side-tattoo-design artist-tattoo-2" />
+            </div>
             <div className="side-content">
               <div className="side-header">
                 <h3 className="side-title">For Tattoo Artists</h3>

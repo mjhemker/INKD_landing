@@ -140,6 +140,67 @@
   background: radial-gradient(circle at 30% 40%, 
     var(--side-color, rgba(138, 43, 226, 0.1)) 0%, 
     transparent 60%);
+  overflow: hidden;
+}
+
+/* Side Tattoo Designs */
+.side-tattoo-design {
+  position: absolute;
+  opacity: 0.5;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.2));
+  animation: side-tattoo-float 12s infinite ease-in-out;
+  pointer-events: none;
+}
+
+.client-tattoo-1 {
+  width: 80px;
+  height: 80px;
+  top: 20%;
+  right: 10%;
+  animation-delay: 0s;
+}
+
+.client-tattoo-2 {
+  width: 90px;
+  height: 90px;
+  bottom: 15%;
+  right: 15%;
+  animation-delay: 6s;
+}
+
+.artist-tattoo-1 {
+  width: 100px;
+  height: 100px;
+  top: 25%;
+  left: 8%;
+  animation-delay: 2s;
+}
+
+.artist-tattoo-2 {
+  width: 85px;
+  height: 85px;
+  bottom: 20%;
+  left: 12%;
+  animation-delay: 8s;
+}
+
+@keyframes side-tattoo-float {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg) scale(1);
+    opacity: 0.5;
+  }
+  25% {
+    transform: translateY(-12px) rotate(2deg) scale(1.03);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateY(-8px) rotate(-1deg) scale(0.98);
+    opacity: 0.55;
+  }
+  75% {
+    transform: translateY(-15px) rotate(3deg) scale(1.05);
+    opacity: 0.58;
+  }
 }
 
 .client-side .side-background {
@@ -743,6 +804,20 @@
   
   .artist-side .split-feature-card:hover {
     transform: translateY(-5px);
+  }
+  
+  .side-tattoo-design {
+    opacity: 0.4;
+  }
+  
+  .client-tattoo-1, .artist-tattoo-1 {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .client-tattoo-2, .artist-tattoo-2 {
+    width: 55px;
+    height: 55px;
   }
   
   .connection-lines {

@@ -169,23 +169,33 @@ const LocalDemo: React.FC = () => {
 
             <div className="interactive-map">
               <div className="map-background">
+                {/* City landmarks and areas */}
+                <div className="city-landmarks">
+                  <div className="landmark park" style={{top: '20%', left: '15%', width: '120px', height: '80px'}}>Fairmount Park</div>
+                  <div className="landmark river" style={{top: '40%', left: '0%', width: '100%', height: '8px'}}>Schuylkill River</div>
+                  <div className="landmark downtown" style={{top: '35%', left: '25%', width: '200px', height: '150px'}}>Center City</div>
+                  <div className="landmark area" style={{top: '55%', left: '20%', width: '150px', height: '100px'}}>South Philly</div>
+                  <div className="landmark area" style={{top: '25%', left: '50%', width: '140px', height: '90px'}}>Northern Liberties</div>
+                  <div className="landmark area" style={{top: '50%', left: '60%', width: '130px', height: '80px'}}>Fishtown</div>
+                </div>
+
                 {/* Street grid overlay */}
                 <div className="street-grid">
-                  {Array.from({length: 8}).map((_, i) => (
-                    <div key={`h-${i}`} className="street horizontal" style={{top: `${12.5 * (i + 1)}%`}} />
+                  {Array.from({length: 6}).map((_, i) => (
+                    <div key={`h-${i}`} className="street horizontal" style={{top: `${16.6 * (i + 1)}%`}} />
                   ))}
-                  {Array.from({length: 8}).map((_, i) => (
-                    <div key={`v-${i}`} className="street vertical" style={{left: `${12.5 * (i + 1)}%`}} />
+                  {Array.from({length: 6}).map((_, i) => (
+                    <div key={`v-${i}`} className="street vertical" style={{left: `${16.6 * (i + 1)}%`}} />
                   ))}
                 </div>
 
                 {/* Neighborhoods */}
                 <div className="neighborhoods">
-                  <div className="neighborhood" style={{top: '45%', left: '30%'}}>Center City</div>
+                  <div className="neighborhood" style={{top: '40%', left: '35%'}}>Center City</div>
                   <div className="neighborhood" style={{top: '60%', left: '25%'}}>South Philly</div>
-                  <div className="neighborhood" style={{top: '35%', left: '45%'}}>Northern Liberties</div>
-                  <div className="neighborhood" style={{top: '55%', left: '55%'}}>Fishtown</div>
-                  <div className="neighborhood" style={{top: '30%', left: '20%'}}>Fairmount</div>
+                  <div className="neighborhood" style={{top: '30%', left: '55%'}}>Northern Liberties</div>
+                  <div className="neighborhood" style={{top: '55%', left: '65%'}}>Fishtown</div>
+                  <div className="neighborhood" style={{top: '25%', left: '20%'}}>Fairmount</div>
                 </div>
 
                 {/* Artist markers */}

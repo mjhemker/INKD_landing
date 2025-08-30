@@ -167,129 +167,36 @@
 .interactive-map {
   position: relative;
   height: 500px;
-  background: linear-gradient(135deg, #2A2A2A 0%, #1E1E1E 100%);
   border: 2px solid rgba(138, 43, 226, 0.2);
   border-radius: 16px;
   overflow: hidden;
 }
 
-.map-background {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  background: #F5F5F5;
-}
-
-/* City Blocks */
-.city-blocks {
+.real-map-container {
   position: absolute;
   inset: 0;
   z-index: 1;
 }
 
-.city-block {
-  position: absolute;
-  background: #FFFFFF;
-  border: 1px solid #E0E0E0;
-  border-radius: 2px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-/* Major Streets */
-.major-streets {
+.map-overlay {
   position: absolute;
   inset: 0;
-  z-index: 2;
+  z-index: 10;
+  pointer-events: none;
 }
 
-.major-street {
-  position: absolute;
-  background: #FFC107;
-  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
-}
 
-.major-street.horizontal {
-  width: 100%;
-}
-
-.major-street.vertical {
-  height: 100%;
-}
-
-/* Green Spaces */
-.green-spaces {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-}
-
-.park {
-  position: absolute;
-  background: #4CAF50;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.7rem;
-  font-weight: 600;
-  color: white;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.park.small {
-  font-size: 0.6rem;
-}
-
-/* Water Features */
-.water-features {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-}
-
-.river {
-  position: absolute;
-  background: #2196F3;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.7rem;
-  font-weight: 600;
-  color: white;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-  writing-mode: vertical-rl;
-  text-orientation: mixed;
-}
 
 
 /* Neighborhoods */
-.neighborhoods {
-  position: absolute;
-  inset: 0;
-}
-
-.neighborhood {
-  position: absolute;
-  font-size: 0.75rem;
-  color: #666;
-  font-weight: 600;
-  transform: translate(-50%, -50%);
-  padding: 4px 8px;
-  background: rgba(255, 255, 255, 0.9);
-  border: 1px solid #DDD;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(10px);
-}
 
 /* Artist Markers */
 .artist-marker {
   position: absolute;
   transform: translate(-50%, -100%);
   cursor: pointer;
-  z-index: 10;
+  z-index: 20;
+  pointer-events: auto;
 }
 
 .marker-pulse {
@@ -386,8 +293,9 @@
   border-radius: 12px;
   padding: 12px;
   white-space: nowrap;
-  z-index: 20;
+  z-index: 30;
   animation: tooltip-appear 0.2s ease-out;
+  pointer-events: none;
 }
 
 @keyframes tooltip-appear {

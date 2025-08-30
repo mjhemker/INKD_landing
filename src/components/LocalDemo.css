@@ -272,44 +272,55 @@
 .marker-icon {
   position: relative;
   z-index: 2;
-  width: 28px;
-  height: 36px;
-  background: linear-gradient(135deg, #8A2BE2, #9932CC);
-  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+  width: 32px;
+  height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
-  box-shadow: 0 4px 12px rgba(138, 43, 226, 0.4);
   transition: all 0.3s ease;
 }
 
-.marker-icon::before {
-  content: '';
-  position: absolute;
-  top: 4px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 12px;
-  height: 12px;
-  background: white;
-  border-radius: 50%;
-  border: 2px solid #8A2BE2;
+.pin-icon {
+  width: 28px;
+  height: 28px;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+  transition: all 0.3s ease;
 }
 
-.artist-marker.offline .marker-icon {
-  background: linear-gradient(135deg, #666, #555);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+.artist-marker.online .pin-icon {
+  filter: 
+    drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3))
+    hue-rotate(270deg)
+    saturate(2)
+    brightness(1.2);
 }
 
-.artist-marker.offline .marker-icon::before {
-  border-color: #555;
+.artist-marker.offline .pin-icon {
+  filter: 
+    drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3))
+    grayscale(1)
+    brightness(0.7);
 }
 
 .artist-marker:hover .marker-icon,
 .artist-marker.hovered .marker-icon {
-  transform: scale(1.15);
-  box-shadow: 0 6px 20px rgba(138, 43, 226, 0.6);
+  transform: scale(1.2);
+}
+
+.artist-marker:hover .pin-icon,
+.artist-marker.hovered .pin-icon {
+  filter: 
+    drop-shadow(0 6px 12px rgba(138, 43, 226, 0.6))
+    hue-rotate(270deg)
+    saturate(2.5)
+    brightness(1.4);
+}
+
+.artist-marker.offline:hover .pin-icon {
+  filter: 
+    drop-shadow(0 6px 12px rgba(0, 0, 0, 0.4))
+    grayscale(1)
+    brightness(0.8);
 }
 
 /* Marker Tooltip */

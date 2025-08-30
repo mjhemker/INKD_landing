@@ -14,8 +14,8 @@ function App() {
     <div className="App">
       <Hero />
       <Features />
-      <LocalDemo />
       <HowItWorks />
+      <LocalDemo />
       <Screenshots />
       <AIAssistant />
       <CallToAction />

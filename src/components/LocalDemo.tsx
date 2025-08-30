@@ -203,6 +203,7 @@ const LocalDemo: React.FC = () => {
                   >
                     <div className="marker-pulse"></div>
                     <div className="marker-icon">
+                      <img src="/location_pin.svg" alt="Location" className="pin-icon" />
                     </div>
                     {hoveredArtist?.id === artist.id && (
                       <div className="marker-tooltip">

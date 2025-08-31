@@ -1,69 +1,44 @@
-// Google Apps Script to handle INKD waitlist submissions
+// Working Google Apps Script for INKD waitlist (based on pantreat_landing)
 // Deploy this as a web app in Google Apps Script console
 
-// Replace 'YOUR_SPREADSHEET_ID' with your actual Google Sheets ID
-const SPREADSHEET_ID = 'YOUR_SPREADSHEET_ID';
-const SHEET_NAME = 'INKD Waitlist';
-
 function doPost(e) {
+  console.log('Received request:', e.postData.contents);
+  
   try {
-    // Parse the request
+    // Get the active sheet (make sure you're connected to your Google Sheet)
+    const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+    
+    // Parse the incoming data
     const data = JSON.parse(e.postData.contents);
-    const { email, userType, timestamp } = data;
+    console.log('Parsed data:', data);
     
-    // Validate data
-    if (!email || !userType || !timestamp) {
-      return ContentService
-        .createTextOutput(JSON.stringify({ success: false, error: 'Missing required fields' }))
-        .setMimeType(ContentService.MimeType.JSON);
+    // Extract fields
+    const email = data.email || 'No email';
+    const userType = data.userType || 'Not specified';
+    const timestamp = data.timestamp || new Date().toLocaleString();
+    
+    // Add headers if this is the first entry
+    if (sheet.getLastRow() === 0) {
+      sheet.appendRow(['Email', 'User Type', 'Signup Time']);
     }
     
-    // Get the spreadsheet
-    const spreadsheet = SpreadsheetApp.openById(SPREADSHEET_ID);
-    let sheet = spreadsheet.getSheetByName(SHEET_NAME);
-    
-    // Create sheet if it doesn't exist
-    if (!sheet) {
-      sheet = spreadsheet.insertSheet(SHEET_NAME);
-      // Add headers
-      sheet.getRange(1, 1, 1, 4).setValues([['Timestamp', 'Email', 'User Type', 'Submitted At']]);
-      sheet.getRange(1, 1, 1, 4).setFontWeight('bold');
-    }
-    
-    // Add the new entry
-    const formattedTimestamp = new Date(timestamp).toLocaleString('en-US', {
-      timeZone: 'America/New_York',
-      year: 'numeric',
-      month: '2-digit',
-      day: '2-digit',
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit'
-    });
-    
-    sheet.appendRow([
-      formattedTimestamp,
-      email,
-      userType,
-      new Date().toISOString()
-    ]);
+    // Add row to sheet
+    sheet.appendRow([email, userType, timestamp]);
+    console.log('Row added successfully');
     
     // Return success response
     return ContentService
-      .createTextOutput(JSON.stringify({ success: true }))
+      .createTextOutput(JSON.stringify({ success: true, message: 'Added to sheet' }))
       .setMimeType(ContentService.MimeType.JSON);
       
   } catch (error) {
-    // Return error response
+    console.error('Error in doPost:', error);
+    
     return ContentService
-      .createTextOutput(JSON.stringify({ success: false, error: error.toString() }))
+      .createTextOutput(JSON.stringify({ 
+        success: false, 
+        error: error.toString() 
+      }))
       .setMimeType(ContentService.MimeType.JSON);
   }
-}
-
-// Handle preflight requests for CORS
-function doGet(e) {
-  return ContentService
-    .createTextOutput(JSON.stringify({ status: 'INKD Waitlist API Ready' }))
-    .setMimeType(ContentService.MimeType.JSON);
 }

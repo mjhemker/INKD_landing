@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { IconPalette, IconBolt, IconRocket, IconArrowRight, IconCheck } from '@tabler/icons-react';
-import { submitToWaitlist } from '../utils/googleSheets';
+import { IconPalette, IconBolt, IconRocket, IconArrowRight, IconCheck, IconUser } from '@tabler/icons-react';
+import { addToWaitlist } from '../services/waitlist';
 import './CallToAction.css';
 
 const CallToAction: React.FC = () => {
@@ -18,19 +18,19 @@ const CallToAction: React.FC = () => {
     setErrorMessage('');
 
     try {
-      const success = await submitToWaitlist(email.trim(), userType);
+      const success = await addToWaitlist(email.trim(), userType);
       
       if (success) {
         setIsSubmitted(true);
+        setEmail('');
         setTimeout(() => {
           setIsSubmitted(false);
-          setEmail('');
-        }, 3000);
+        }, 2500);
       } else {
-        setErrorMessage('Failed to join waitlist. Please try again.');
+        setErrorMessage('Unable to join waitlist. Please try again.');
       }
     } catch (error) {
-      setErrorMessage('Something went wrong. Please try again.');
+      setErrorMessage('Network error. Please check your connection.');
     } finally {
       setIsSubmitting(false);
     }
@@ -105,15 +105,17 @@ const CallToAction: React.FC = () => {
             <button 
               className={`user-type-btn ${userType === 'client' ? 'active' : ''}`}
               onClick={() => setUserType('client')}
+              type="button"
             >
-              <i className="fas fa-user"></i>
+              <IconUser size={18} />
               I'm a Client
             </button>
             <button 
               className={`user-type-btn ${userType === 'artist' ? 'active' : ''}`}
               onClick={() => setUserType('artist')}
+              type="button"
             >
-              <i className="fas fa-palette"></i>
+              <IconPalette size={18} />
               I'm an Artist
             </button>
           </div>

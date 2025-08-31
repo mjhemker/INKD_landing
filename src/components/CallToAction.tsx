@@ -1,20 +1,38 @@
 import React, { useState } from 'react';
 import { IconPalette, IconBolt, IconRocket, IconArrowRight, IconCheck } from '@tabler/icons-react';
+import { submitToWaitlist } from '../utils/googleSheets';
 import './CallToAction.css';
 
 const CallToAction: React.FC = () => {
   const [email, setEmail] = useState('');
   const [userType, setUserType] = useState<'client' | 'artist'>('client');
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (email.trim()) {
-      setIsSubmitted(true);
-      setTimeout(() => {
-        setIsSubmitted(false);
-        setEmail('');
-      }, 3000);
+    if (!email.trim()) return;
+
+    setIsSubmitting(true);
+    setErrorMessage('');
+
+    try {
+      const success = await submitToWaitlist(email.trim(), userType);
+      
+      if (success) {
+        setIsSubmitted(true);
+        setTimeout(() => {
+          setIsSubmitted(false);
+          setEmail('');
+        }, 3000);
+      } else {
+        setErrorMessage('Failed to join waitlist. Please try again.');
+      }
+    } catch (error) {
+      setErrorMessage('Something went wrong. Please try again.');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -114,12 +132,17 @@ const CallToAction: React.FC = () => {
                 <button 
                   type="submit" 
                   className="submit-btn"
-                  disabled={isSubmitted}
+                  disabled={isSubmitted || isSubmitting}
                 >
                   {isSubmitted ? (
                     <>
                       <IconCheck size={16} />
                       Added!
+                    </>
+                  ) : isSubmitting ? (
+                    <>
+                      <IconArrowRight size={16} className="spinning" />
+                      Joining...
                     </>
                   ) : (
                     <>
@@ -131,6 +154,11 @@ const CallToAction: React.FC = () => {
               </div>
             </div>
             
+            {errorMessage && (
+              <p className="form-error" style={{ color: '#ff4444', marginTop: '8px', fontSize: '0.9rem' }}>
+                {errorMessage}
+              </p>
+            )}
             <p className="form-disclaimer">
               By joining, you'll be the first to know when INKD launches. No spam, ever.
             </p>

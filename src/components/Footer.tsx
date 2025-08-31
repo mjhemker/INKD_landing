@@ -51,9 +51,9 @@ const Footer: React.FC = () => {
               </div>
               
               <div className="contact-info">
-                <a href="mailto:hello@inkdapp.com" className="contact-email">
+                <a href="mailto:getinkdapp@gmail.com" className="contact-email">
                   <i className="fas fa-envelope"></i>
-                  hello@inkdapp.com
+                  getinkdapp@gmail.com
                 </a>
               </div>
             </div>

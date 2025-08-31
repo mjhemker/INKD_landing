@@ -36,26 +36,27 @@ interface Artist {
 
 // Custom pin icons using Material Design location pin
 const createCustomPin = (isOnline: boolean, isVerified: boolean, isSelected: boolean = false) => {
-  const scale = isSelected ? 1.3 : 1;
+  const scale = isSelected ? 1.4 : 1;
   const color = isOnline ? '#8A2BE2' : '#666';
-  const verifiedIndicator = isVerified ? '<div style="position:absolute;top:2px;right:2px;width:10px;height:10px;background:#00FF88;border:2px solid white;border-radius:50%;z-index:10;"></div>' : '';
+  const size = isSelected ? 36 : 28;
+  const verifiedIndicator = isVerified ? `<div style="position:absolute;top:-2px;right:-2px;width:12px;height:12px;background:#00FF88;border:2px solid white;border-radius:50%;z-index:10;box-shadow:0 2px 4px rgba(0,0,0,0.2);"></div>` : '';
   
   return L.divIcon({
     html: `<div style="
       position: relative;
       transform: scale(${scale});
-      transition: all 0.2s ease;
-      filter: drop-shadow(0 3px 8px rgba(0,0,0,0.3));
+      transition: all 0.3s ease;
+      filter: drop-shadow(0 4px 12px rgba(0,0,0,0.4));
     ">
-      <svg xmlns="http://www.w3.org/2000/svg" height="32px" viewBox="0 -960 960 960" width="32px" fill="${color}">
+      <svg xmlns="http://www.w3.org/2000/svg" height="${size}px" viewBox="0 -960 960 960" width="${size}px" fill="${color}" style="filter: drop-shadow(0 2px 4px rgba(255,255,255,0.1));">
         <path d="M480-480q33 0 56.5-23.5T560-560q0-33-23.5-56.5T480-640q-33 0-56.5 23.5T400-560q0 33 23.5 56.5T480-480Zm0 294q122-112 181-203.5T720-552q0-109-69.5-178.5T480-800q-101 0-170.5 69.5T240-552q0 71 59 162.5T480-186Zm0 106Q319-217 239.5-334.5T160-552q0-150 96.5-239T480-880q127 0 223.5 89T800-552q0 100-79.5 217.5T480-80Zm0-480Z"/>
       </svg>
       ${verifiedIndicator}
     </div>`,
     className: 'custom-artist-pin',
-    iconSize: [32, 32],
-    iconAnchor: [16, 32],
-    popupAnchor: [0, -32]
+    iconSize: [size, size],
+    iconAnchor: [size/2, size],
+    popupAnchor: [0, -size]
   });
 };
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import Navigation from './components/Navigation';
 import Hero from './components/Hero';
 import Features from './components/Features';
 import LocalDemo from './components/LocalDemo';
@@ -11,6 +12,7 @@ import Footer from './components/Footer';
 function App() {
   return (
     <div className="App">
+      <Navigation />
       <Hero />
       <Features />
       <HowItWorks />

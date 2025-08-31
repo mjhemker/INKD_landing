@@ -44,7 +44,7 @@ const Hero: React.FC = () => {
   }, []);
 
   return (
-    <section className="hero" ref={heroRef}>
+    <section id="hero" className="hero" ref={heroRef}>
       <div className="particles-container" ref={particlesRef}></div>
       <div className="hero-background">
         <div className="floating-shapes">
@@ -117,10 +117,20 @@ const Hero: React.FC = () => {
               </span>
               <span className="hero-tagline">Where Ink Meets Inspiration</span>
             </h1>
-            <p className="hero-subtitle">
-              The ultimate local platform connecting tattoo enthusiasts with nearby world-class artists. 
-              Discover local portfolios, book seamlessly with artists in your area, and bring your vision to life with cutting-edge AR technology.
-            </p>
+            <div className="hero-audience">
+              <div className="audience-item">
+                <IconPalette size={20} className="audience-icon" />
+                <span className="audience-text">
+                  <strong>For Artists:</strong> Showcase your work, connect with local clients, and grow your business
+                </span>
+              </div>
+              <div className="audience-item">
+                <IconHeart size={20} className="audience-icon" />
+                <span className="audience-text">
+                  <strong>For Tattoo Lovers:</strong> Discover amazing artists, book instantly, and visualize your tattoo with AR
+                </span>
+              </div>
+            </div>
             <div className="hero-stats">
               <div className="stat-item">
                 <IconPalette size={20} className="stat-icon" />

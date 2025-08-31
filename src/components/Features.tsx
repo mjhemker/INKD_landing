@@ -91,7 +91,7 @@ const Features: React.FC = () => {
   }, []);
 
   return (
-    <section className="features section" ref={sectionRef}>
+    <section id="features" className="features section" ref={sectionRef}>
       <div className="features-background">
         <div className="floating-ink-drop drop-1"></div>
         <div className="floating-ink-drop drop-2"></div>

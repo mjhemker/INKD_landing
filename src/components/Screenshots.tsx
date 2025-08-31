@@ -36,7 +36,7 @@ const Screenshots: React.FC = () => {
   };
 
   return (
-    <section className="screenshots section">
+    <section id="screenshots" className="screenshots section">
       <div className="container">
         <h2 className="section-title">See INKD in Action</h2>
         <p className="section-subtitle">

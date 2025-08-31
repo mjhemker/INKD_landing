@@ -57,7 +57,7 @@ const HowItWorks: React.FC = () => {
   ];
 
   return (
-    <section className="how-it-works section">
+    <section id="how-it-works" className="how-it-works section">
       <div className="works-background">
         <div className="floating-ink-drop works-drop-1"></div>
         <div className="floating-ink-drop works-drop-2"></div>

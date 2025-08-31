@@ -43,7 +43,7 @@ const CallToAction: React.FC = () => {
   };
 
   return (
-    <section className="call-to-action section">
+    <section id="call-to-action" className="call-to-action section">
       <div className="cta-background">
         <div className="cta-ink-drop cta-drop-1"></div>
         <div className="cta-ink-drop cta-drop-2"></div>

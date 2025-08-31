@@ -239,7 +239,7 @@ const LocalDemo: React.FC = () => {
   };
 
   return (
-    <section className="local-demo section">
+    <section id="local-demo" className="local-demo section">
       <div className="demo-background">
         <div className="demo-blob blob-1"></div>
         <div className="demo-blob blob-2"></div>

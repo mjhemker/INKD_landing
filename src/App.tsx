@@ -5,7 +5,6 @@ import Features from './components/Features';
 import LocalDemo from './components/LocalDemo';
 import HowItWorks from './components/HowItWorks';
 import Screenshots from './components/Screenshots';
-import AIAssistant from './components/AIAssistant';
 import CallToAction from './components/CallToAction';
 import Footer from './components/Footer';
 
@@ -17,7 +16,6 @@ function App() {
       <HowItWorks />
       <LocalDemo />
       <Screenshots />
-      <AIAssistant />
       <CallToAction />
       <Footer />
     </div>

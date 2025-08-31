@@ -27,26 +27,6 @@ const Footer: React.FC = () => {
                   <li><a href="#pricing">Pricing</a></li>
                 </ul>
               </div>
-              
-              <div className="link-group">
-                <h4>Company</h4>
-                <ul>
-                  <li><a href="#about">About INKD</a></li>
-                  <li><a href="#careers">Careers</a></li>
-                  <li><a href="#press">Press</a></li>
-                  <li><a href="#blog">Blog</a></li>
-                </ul>
-              </div>
-              
-              <div className="link-group">
-                <h4>Support</h4>
-                <ul>
-                  <li><a href="#help">Help Center</a></li>
-                  <li><a href="#contact">Contact Us</a></li>
-                  <li><a href="#safety">Safety</a></li>
-                  <li><a href="#community">Community</a></li>
-                </ul>
-              </div>
             </div>
             
             <div className="footer-social">

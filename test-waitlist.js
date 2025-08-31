@@ -8,8 +8,7 @@ const testWaitlist = async () => {
     timestamp: new Date().toISOString()
   };
 
-  // You'll need to update this URL after creating your new Google Apps Script
-  const testUrl = 'YOUR_NEW_WEB_APP_URL_HERE';
+  const testUrl = 'https://script.google.com/macros/s/AKfycbzmYf1vcuUT31NqYQJhuz7CHo6LI1HB_UHghOtjWSuaI6S1AVoRtT5QvxpFT4IwFUcsqw/exec';
   
   console.log('Testing waitlist with:', testData);
   

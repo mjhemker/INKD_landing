@@ -17,19 +17,25 @@ const CallToAction: React.FC = () => {
     setIsSubmitting(true);
     setErrorMessage('');
 
+    console.log('Form submitted:', { email: email.trim(), userType });
+
     try {
       const success = await addToWaitlist(email.trim(), userType);
+      console.log('Waitlist result:', success);
       
       if (success) {
+        console.log('✅ Success! Showing confirmation...');
         setIsSubmitted(true);
         setEmail('');
         setTimeout(() => {
           setIsSubmitted(false);
         }, 2500);
       } else {
+        console.log('❌ Failed, showing error...');
         setErrorMessage('Unable to join waitlist. Please try again.');
       }
     } catch (error) {
+      console.log('❌ Exception caught:', error);
       setErrorMessage('Network error. Please check your connection.');
     } finally {
       setIsSubmitting(false);

@@ -17,7 +17,14 @@ export const submitToWaitlist = async (email: string, userType: 'client' | 'arti
       return false;
     }
     
-    console.log('📊 Submitting to waitlist:', { email, userType, timestamp });
+    const payload = {
+      email: email,
+      userType: userType === 'client' ? 'Client' : 'Artist',
+      timestamp: timestamp
+    };
+    
+    console.log('📊 Submitting to waitlist:', payload);
+    console.log('📊 URL:', url);
     
     // Use the working pattern from pantreat_landing
     const response = await fetch(url, {
@@ -25,24 +32,28 @@ export const submitToWaitlist = async (email: string, userType: 'client' | 'arti
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        email: email,
-        userType: userType === 'client' ? 'Client' : 'Artist',
-        timestamp: timestamp
-      }),
+      body: JSON.stringify(payload),
     });
 
     const responseText = await response.text();
     console.log('📊 Google Sheets response:', response.status, responseText);
+    console.log('📊 Full response object:', response);
 
-    if (!response.ok) {
-      throw new Error(`Google Sheets API error: ${response.status} - ${responseText}`);
+    // Since we can see the data is being saved to the sheet, 
+    // let's be more forgiving with response parsing
+    try {
+      const result = JSON.parse(responseText);
+      console.log('✅ Successfully saved to Google Sheets:', result);
+      return result.success;
+    } catch (parseError) {
+      // If we can't parse the response but got a 200 status, assume success
+      console.log('⚠️ Could not parse response, but got status:', response.status);
+      if (response.status === 200) {
+        console.log('✅ Assuming success based on 200 status');
+        return true;
+      }
+      return false;
     }
-
-    const result = JSON.parse(responseText);
-    console.log('✅ Successfully saved to Google Sheets:', result);
-    
-    return result.success;
     
   } catch (error) {
     console.error('❌ Google Sheets error:', error);

@@ -7,7 +7,7 @@ interface WaitlistEntry {
 export const addToWaitlist = async (email: string, userType: 'client' | 'artist'): Promise<boolean> => {
   const webAppUrl = process.env.REACT_APP_WAITLIST_ENDPOINT;
   
-  if (!webAppUrl) {
+  if (!webAppUrl || webAppUrl.trim() === '') {
     console.error('Waitlist endpoint not configured');
     return false;
   }
@@ -17,6 +17,9 @@ export const addToWaitlist = async (email: string, userType: 'client' | 'artist'
     userType: userType,
     timestamp: new Date().toISOString()
   };
+
+  console.log('Submitting to waitlist:', entry);
+  console.log('Endpoint:', webAppUrl);
 
   try {
     const response = await fetch(webAppUrl, {
@@ -29,10 +32,13 @@ export const addToWaitlist = async (email: string, userType: 'client' | 'artist'
 
     if (response.ok) {
       const result = await response.json();
+      console.log('Response received:', result);
       return result.success === true;
+    } else {
+      console.error('HTTP error:', response.status, response.statusText);
+      return false;
     }
     
-    return false;
   } catch (error) {
     console.error('Waitlist submission failed:', error);
     return false;

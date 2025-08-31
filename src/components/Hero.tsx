@@ -121,7 +121,7 @@ const Hero: React.FC = () => {
               <div className="audience-item">
                 <IconPalette size={20} className="audience-icon" />
                 <span className="audience-text">
-                  <strong>For Artists:</strong> Showcase your work, connect with local clients, and grow your business
+                  <strong>For Tattoo Artists:</strong> Showcase your work, streamline your operations, and grow your brand
                 </span>
               </div>
               <div className="audience-item">
@@ -129,20 +129,6 @@ const Hero: React.FC = () => {
                 <span className="audience-text">
                   <strong>For Tattoo Lovers:</strong> Discover amazing artists, book instantly, and visualize your tattoo with AR
                 </span>
-              </div>
-            </div>
-            <div className="hero-stats">
-              <div className="stat-item">
-                <IconPalette size={20} className="stat-icon" />
-                <span className="stat-text">Local Artists</span>
-              </div>
-              <div className="stat-item">
-                <IconDeviceMobile size={20} className="stat-icon" />
-                <span className="stat-text">Smart Booking</span>
-              </div>
-              <div className="stat-item">
-                <IconRobot size={20} className="stat-icon" />
-                <span className="stat-text">AI Powered</span>
               </div>
             </div>
             <div className="hero-cta">

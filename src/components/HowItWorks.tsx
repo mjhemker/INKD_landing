@@ -36,9 +36,9 @@ const HowItWorks: React.FC = () => {
 
   const artistFeatures = [
     {
-      Icon: IconPalette,
-      title: 'Portfolio Showcase',
-      description: 'Create stunning digital portfolios that attract local clients and showcase your best work.'
+      Icon: IconBrain,
+      title: 'Workflow Automation',
+      description: 'From managing consultations to sending follow-ups, streamline daily tasks.'
     },
     {
       Icon: IconCalendar,

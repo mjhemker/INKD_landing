@@ -170,19 +170,68 @@
   border: 2px solid rgba(138, 43, 226, 0.2);
   border-radius: 16px;
   overflow: hidden;
+  background: #1a1a1a;
 }
 
-.real-map-container {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
+.styled-map {
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
-.map-overlay {
-  position: absolute;
-  inset: 0;
-  z-index: 10;
+.map-label {
+  font-size: 11px;
+  font-weight: 600;
+  fill: rgba(255, 255, 255, 0.8);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* SVG Artist Markers */
+.svg-artist-marker {
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.location-pin {
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+  transition: all 0.3s ease;
+}
+
+.svg-artist-marker:hover .location-pin {
+  filter: drop-shadow(0 6px 12px rgba(138, 43, 226, 0.6));
+  transform: scale(1.1);
+}
+
+.svg-artist-marker.offline:hover .location-pin {
+  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.4));
+}
+
+.svg-marker-pulse {
+  animation: svg-marker-pulse 2s infinite ease-in-out;
+}
+
+@keyframes svg-marker-pulse {
+  0%, 100% {
+    r: 25;
+    opacity: 0.6;
+  }
+  50% {
+    r: 35;
+    opacity: 0;
+  }
+}
+
+/* SVG Marker Tooltip */
+.svg-marker-tooltip {
+  background: rgba(26, 26, 26, 0.95);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(138, 43, 226, 0.3);
+  border-radius: 12px;
+  padding: 12px;
+  white-space: nowrap;
+  animation: tooltip-appear 0.2s ease-out;
   pointer-events: none;
+  font-size: 12px;
 }
 
 

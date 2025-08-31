@@ -1,14 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
 import { 
   IconMapPin, 
   IconStar, 
   IconClock, 
-  IconPhone, 
   IconCalendar,
   IconUser,
   IconPalette,
   IconHeart,
-  IconX
+  IconX,
+  IconCheck
 } from '@tabler/icons-react';
 import './LocalDemo.css';
 
@@ -25,13 +28,56 @@ interface Artist {
   hourlyRate: string;
   nextAvailable: string;
   position: { x: number; y: number };
+  location: [number, number]; // [latitude, longitude]
+  address: string;
   isOnline: boolean;
+  verified: boolean;
 }
+
+// Custom pin icons using Material Design location pin
+const createCustomPin = (isOnline: boolean, isVerified: boolean, isSelected: boolean = false) => {
+  const scale = isSelected ? 1.3 : 1;
+  const color = isOnline ? '#8A2BE2' : '#666';
+  const verifiedIndicator = isVerified ? '<div style="position:absolute;top:2px;right:2px;width:10px;height:10px;background:#00FF88;border:2px solid white;border-radius:50%;z-index:10;"></div>' : '';
+  
+  return L.divIcon({
+    html: `<div style="
+      position: relative;
+      transform: scale(${scale});
+      transition: all 0.2s ease;
+      filter: drop-shadow(0 3px 8px rgba(0,0,0,0.3));
+    ">
+      <svg xmlns="http://www.w3.org/2000/svg" height="32px" viewBox="0 -960 960 960" width="32px" fill="${color}">
+        <path d="M480-480q33 0 56.5-23.5T560-560q0-33-23.5-56.5T480-640q-33 0-56.5 23.5T400-560q0 33 23.5 56.5T480-480Zm0 294q122-112 181-203.5T720-552q0-109-69.5-178.5T480-800q-101 0-170.5 69.5T240-552q0 71 59 162.5T480-186Zm0 106Q319-217 239.5-334.5T160-552q0-150 96.5-239T480-880q127 0 223.5 89T800-552q0 100-79.5 217.5T480-80Zm0-480Z"/>
+      </svg>
+      ${verifiedIndicator}
+    </div>`,
+    className: 'custom-artist-pin',
+    iconSize: [32, 32],
+    iconAnchor: [16, 32],
+    popupAnchor: [0, -32]
+  });
+};
+
+const userLocationIcon = L.divIcon({
+  html: `<div style="
+    width: 16px;
+    height: 16px;
+    background: #00FF88;
+    border: 3px solid white;
+    border-radius: 50%;
+    box-shadow: 0 0 15px rgba(0, 255, 136, 0.6);
+  "></div>`,
+  className: 'user-location-pin',
+  iconSize: [16, 16],
+  iconAnchor: [8, 8]
+});
 
 const LocalDemo: React.FC = () => {
   const [selectedArtist, setSelectedArtist] = useState<Artist | null>(null);
-  const [hoveredArtist, setHoveredArtist] = useState<Artist | null>(null);
-  const [mapCenter, setMapCenter] = useState({ x: 50, y: 50 });
+  const [activeFilter, setActiveFilter] = useState<'all' | 'available' | 'top-rated'>('all');
+  const [userLocation, setUserLocation] = useState<[number, number] | null>(null);
+  const mapRef = useRef<L.Map | null>(null);
 
   const artists: Artist[] = [
     {
@@ -46,8 +92,11 @@ const LocalDemo: React.FC = () => {
       bio: "Specializing in vibrant traditional pieces with a modern twist. 8+ years of experience creating memorable tattoos.",
       hourlyRate: "$180/hr",
       nextAvailable: "Today 2:00 PM",
-      position: { x: 360, y: 175 }, // Center City
-      isOnline: true
+      position: { x: 360, y: 175 },
+      location: [39.9526, -75.1652], // Center City Philadelphia
+      address: "Center City, Philadelphia, PA",
+      isOnline: true,
+      verified: true
     },
     {
       id: 2,
@@ -61,8 +110,11 @@ const LocalDemo: React.FC = () => {
       bio: "Award-winning portrait artist known for hyper-realistic black & grey work. Featured in Tattoo Magazine 2023.",
       hourlyRate: "$220/hr",
       nextAvailable: "Tomorrow 10:00 AM",
-      position: { x: 520, y: 225 }, // Fishtown
-      isOnline: true
+      position: { x: 520, y: 225 },
+      location: [39.9670, -75.1340], // Fishtown
+      address: "Fishtown, Philadelphia, PA",
+      isOnline: true,
+      verified: true
     },
     {
       id: 3,
@@ -76,8 +128,11 @@ const LocalDemo: React.FC = () => {
       bio: "Delicate fine line work and geometric designs. Perfect for first-time tattoo clients looking for subtle elegance.",
       hourlyRate: "$160/hr",
       nextAvailable: "Today 4:30 PM",
-      position: { x: 240, y: 300 }, // South Philly
-      isOnline: false
+      position: { x: 240, y: 300 },
+      location: [39.9259, -75.1718], // South Philadelphia
+      address: "South Philadelphia, PA",
+      isOnline: false,
+      verified: true
     },
     {
       id: 4,
@@ -91,8 +146,11 @@ const LocalDemo: React.FC = () => {
       bio: "Traditional Japanese techniques meets contemporary style. Studied under masters in Tokyo for 3 years.",
       hourlyRate: "$200/hr",
       nextAvailable: "Next Week",
-      position: { x: 560, y: 125 }, // Northern Liberties
-      isOnline: true
+      position: { x: 560, y: 125 },
+      location: [39.9739, -75.1341], // Northern Liberties
+      address: "Northern Liberties, Philadelphia, PA",
+      isOnline: true,
+      verified: false
     },
     {
       id: 5,
@@ -106,8 +164,11 @@ const LocalDemo: React.FC = () => {
       bio: "Vibrant watercolor tattoos that look like paintings on skin. Featured in international tattoo conventions.",
       hourlyRate: "$190/hr",
       nextAvailable: "Today 6:00 PM",
-      position: { x: 200, y: 200 }, // Fairmount
-      isOnline: true
+      position: { x: 200, y: 200 },
+      location: [39.9671, -75.1830], // Fairmount
+      address: "Fairmount, Philadelphia, PA",
+      isOnline: true,
+      verified: true
     },
     {
       id: 6,
@@ -121,13 +182,55 @@ const LocalDemo: React.FC = () => {
       bio: "Intricate blackwork and sacred geometry. Each piece is a unique work of art crafted with precision.",
       hourlyRate: "$175/hr",
       nextAvailable: "Tomorrow 2:00 PM",
-      position: { x: 440, y: 350 }, // Near Delaware River
-      isOnline: true
+      position: { x: 440, y: 350 },
+      location: [39.9390, -75.1372], // Near Delaware River
+      address: "Old City, Philadelphia, PA",
+      isOnline: true,
+      verified: true
     }
   ];
 
+  // Filter artists based on active filter
+  const filteredArtists = artists.filter(artist => {
+    switch (activeFilter) {
+      case 'available':
+        return artist.isOnline;
+      case 'top-rated':
+        return artist.rating >= 4.8;
+      default:
+        return true;
+    }
+  });
+
+  // Geolocation effect
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          setUserLocation([latitude, longitude]);
+        },
+        (error) => {
+          console.log('Geolocation not available:', error);
+        }
+      );
+    }
+  }, []);
+
   const handleMarkerClick = (artist: Artist) => {
     setSelectedArtist(artist);
+  };
+
+  const handleArtistCardClick = (artist: Artist) => {
+    setSelectedArtist(artist);
+    // Center map on artist location
+    if (mapRef.current) {
+      mapRef.current.setView(artist.location, 15, { animate: true });
+    }
+  };
+
+  const handleFilterChange = (filter: 'all' | 'available' | 'top-rated') => {
+    setActiveFilter(filter);
   };
 
   const closeModal = () => {
@@ -163,152 +266,67 @@ const LocalDemo: React.FC = () => {
                 <span>Philadelphia, PA</span>
               </div>
               <div className="map-stats">
-                <span>{artists.filter(a => a.isOnline).length} artists online</span>
+                <span>{filteredArtists.filter(a => a.isOnline).length} artists online</span>
               </div>
             </div>
 
             <div className="interactive-map">
-              <svg className="styled-map" viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                  <linearGradient id="mapGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor="#1a1a1a" />
-                    <stop offset="50%" stopColor="#2a2a2a" />
-                    <stop offset="100%" stopColor="#1e1e1e" />
-                  </linearGradient>
-                  <linearGradient id="waterGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor="rgba(33, 150, 243, 0.8)" />
-                    <stop offset="100%" stopColor="rgba(33, 150, 243, 0.6)" />
-                  </linearGradient>
-                  <linearGradient id="parkGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor="rgba(76, 175, 80, 0.7)" />
-                    <stop offset="100%" stopColor="rgba(76, 175, 80, 0.5)" />
-                  </linearGradient>
-                  <linearGradient id="pinGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor="#8A2BE2" />
-                    <stop offset="100%" stopColor="#9932CC" />
-                  </linearGradient>
-                  <linearGradient id="offlinePinGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor="#666" />
-                    <stop offset="100%" stopColor="#555" />
-                  </linearGradient>
-                </defs>
+              <MapContainer
+                center={[39.9526, -75.1652]} // Philadelphia center
+                zoom={12}
+                className="leaflet-map"
+                zoomControl={true}
+                scrollWheelZoom={true}
+                ref={mapRef}
+              >
+                <TileLayer
+                  attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                />
                 
-                {/* Base map background */}
-                <rect width="800" height="500" fill="url(#mapGradient)" />
+                {/* User location marker */}
+                {userLocation && (
+                  <Marker position={userLocation} icon={userLocationIcon}>
+                    <Popup>
+                      <div style={{ color: '#333', fontWeight: 'bold' }}>
+                        Your Location
+                      </div>
+                    </Popup>
+                  </Marker>
+                )}
                 
-                {/* Water features */}
-                <rect x="0" y="0" width="120" height="500" fill="url(#waterGradient)" rx="5" /> {/* Schuylkill River */}
-                <rect x="0" y="420" width="800" height="80" fill="url(#waterGradient)" rx="5" /> {/* Delaware River */}
-                
-                {/* Parks */}
-                <ellipse cx="200" cy="120" rx="80" ry="60" fill="url(#parkGradient)" /> {/* Fairmount Park */}
-                <ellipse cx="650" cy="350" rx="50" ry="40" fill="url(#parkGradient)" /> {/* Penn Treaty Park */}
-                
-                {/* City blocks */}
-                <rect x="150" y="80" width="60" height="40" fill="rgba(255, 255, 255, 0.1)" stroke="rgba(138, 43, 226, 0.2)" strokeWidth="1" rx="2" />
-                <rect x="220" y="85" width="70" height="45" fill="rgba(255, 255, 255, 0.1)" stroke="rgba(138, 43, 226, 0.2)" strokeWidth="1" rx="2" />
-                <rect x="300" y="75" width="80" height="55" fill="rgba(255, 255, 255, 0.1)" stroke="rgba(138, 43, 226, 0.2)" strokeWidth="1" rx="2" />
-                <rect x="390" y="90" width="75" height="50" fill="rgba(255, 255, 255, 0.1)" stroke="rgba(138, 43, 226, 0.2)" strokeWidth="1" rx="2" />
-                <rect x="480" y="70" width="85" height="60" fill="rgba(255, 255, 255, 0.1)" stroke="rgba(138, 43, 226, 0.2)" strokeWidth="1" rx="2" />
-                
-                <rect x="140" y="150" width="55" height="35" fill="rgba(255, 255, 255, 0.1)" stroke="rgba(138, 43, 226, 0.2)" strokeWidth="1" rx="2" />
-                <rect x="210" y="160" width="90" height="65" fill="rgba(255, 255, 255, 0.1)" stroke="rgba(138, 43, 226, 0.2)" strokeWidth="1" rx="2" />
-                <rect x="320" y="155" width="70" height="55" fill="rgba(255, 255, 255, 0.1)" stroke="rgba(138, 43, 226, 0.2)" strokeWidth="1" rx="2" />
-                <rect x="410" y="170" width="80" height="50" fill="rgba(255, 255, 255, 0.1)" stroke="rgba(138, 43, 226, 0.2)" strokeWidth="1" rx="2" />
-                <rect x="510" y="145" width="75" height="60" fill="rgba(255, 255, 255, 0.1)" stroke="rgba(138, 43, 226, 0.2)" strokeWidth="1" rx="2" />
-                
-                <rect x="160" y="240" width="65" height="45" fill="rgba(255, 255, 255, 0.1)" stroke="rgba(138, 43, 226, 0.2)" strokeWidth="1" rx="2" />
-                <rect x="240" y="250" width="85" height="55" fill="rgba(255, 255, 255, 0.1)" stroke="rgba(138, 43, 226, 0.2)" strokeWidth="1" rx="2" />
-                <rect x="340" y="235" width="75" height="65" fill="rgba(255, 255, 255, 0.1)" stroke="rgba(138, 43, 226, 0.2)" strokeWidth="1" rx="2" />
-                <rect x="430" y="255" width="90" height="50" fill="rgba(255, 255, 255, 0.1)" stroke="rgba(138, 43, 226, 0.2)" strokeWidth="1" rx="2" />
-                <rect x="540" y="240" width="70" height="55" fill="rgba(255, 255, 255, 0.1)" stroke="rgba(138, 43, 226, 0.2)" strokeWidth="1" rx="2" />
-                
-                <rect x="170" y="320" width="80" height="60" fill="rgba(255, 255, 255, 0.1)" stroke="rgba(138, 43, 226, 0.2)" strokeWidth="1" rx="2" />
-                <rect x="270" y="330" width="70" height="45" fill="rgba(255, 255, 255, 0.1)" stroke="rgba(138, 43, 226, 0.2)" strokeWidth="1" rx="2" />
-                <rect x="360" y="315" width="85" height="65" fill="rgba(255, 255, 255, 0.1)" stroke="rgba(138, 43, 226, 0.2)" strokeWidth="1" rx="2" />
-                <rect x="460" y="340" width="75" height="50" fill="rgba(255, 255, 255, 0.1)" stroke="rgba(138, 43, 226, 0.2)" strokeWidth="1" rx="2" />
-                
-                {/* Major streets */}
-                <line x1="130" y1="125" x2="580" y2="125" stroke="rgba(138, 43, 226, 0.4)" strokeWidth="3" /> {/* Market St */}
-                <line x1="130" y1="200" x2="580" y2="200" stroke="rgba(138, 43, 226, 0.4)" strokeWidth="3" /> {/* Walnut St */}
-                <line x1="130" y1="275" x2="580" y2="275" stroke="rgba(138, 43, 226, 0.4)" strokeWidth="3" /> {/* South St */}
-                
-                <line x1="200" y1="50" x2="200" y2="400" stroke="rgba(138, 43, 226, 0.4)" strokeWidth="3" /> {/* Broad St */}
-                <line x1="320" y1="50" x2="320" y2="400" stroke="rgba(138, 43, 226, 0.4)" strokeWidth="3" /> {/* 15th St */}
-                <line x1="440" y1="50" x2="440" y2="400" stroke="rgba(138, 43, 226, 0.4)" strokeWidth="3" /> {/* 8th St */}
-                
-                {/* Neighborhood labels */}
-                <text x="320" y="190" textAnchor="middle" className="map-label">Center City</text>
-                <text x="250" y="350" textAnchor="middle" className="map-label">South Philly</text>
-                <text x="450" y="140" textAnchor="middle" className="map-label">Northern Liberties</text>
-                <text x="520" y="280" textAnchor="middle" className="map-label">Fishtown</text>
-                <text x="180" y="100" textAnchor="middle" className="map-label">Fairmount</text>
-                
-                {/* Artist markers positioned on map coordinates */}
-                {artists.map((artist) => (
-                  <g key={artist.id}>
-                    {/* Marker pulse */}
-                    <circle 
-                      cx={artist.position.x} 
-                      cy={artist.position.y} 
-                      r="25" 
-                      fill={artist.isOnline ? "rgba(138, 43, 226, 0.2)" : "rgba(128, 128, 128, 0.2)"}
-                      className={artist.isOnline ? "svg-marker-pulse" : ""}
-                    />
-                    
-                    {/* Location pin */}
-                    <g 
-                      className={`svg-artist-marker ${artist.isOnline ? 'online' : 'offline'} ${hoveredArtist?.id === artist.id ? 'hovered' : ''}`}
-                      onClick={() => handleMarkerClick(artist)}
-                      onMouseEnter={() => setHoveredArtist(artist)}
-                      onMouseLeave={() => setHoveredArtist(null)}
-                      style={{ cursor: 'pointer' }}
-                    >
-                      <path 
-                        d={`M${artist.position.x},${artist.position.y - 20} 
-                            C${artist.position.x - 8},${artist.position.y - 28} 
-                            ${artist.position.x + 8},${artist.position.y - 28} 
-                            ${artist.position.x},${artist.position.y - 20} 
-                            L${artist.position.x},${artist.position.y} Z`}
-                        fill={artist.isOnline ? "url(#pinGradient)" : "url(#offlinePinGradient)"}
-                        stroke="white"
-                        strokeWidth="2"
-                        className="location-pin"
-                      />
-                      <circle 
-                        cx={artist.position.x} 
-                        cy={artist.position.y - 20} 
-                        r="6" 
-                        fill="white" 
-                        stroke={artist.isOnline ? "#8A2BE2" : "#666"}
-                        strokeWidth="2"
-                      />
-                    </g>
-                    
-                    {/* Tooltip */}
-                    {hoveredArtist?.id === artist.id && (
-                      <foreignObject 
-                        x={artist.position.x - 60} 
-                        y={artist.position.y - 80} 
-                        width="120" 
-                        height="60"
-                        className="svg-tooltip"
-                      >
-                        <div className="svg-marker-tooltip">
-                          <div className="tooltip-content">
-                            <strong>{artist.name}</strong>
-                            <div className="tooltip-rating">
-                              <IconStar size={12} />
-                              <span>{artist.rating}</span>
-                            </div>
-                            <div className="tooltip-distance">{artist.distance}</div>
-                          </div>
+                {/* Artist markers */}
+                {filteredArtists.map((artist) => (
+                  <Marker
+                    key={artist.id}
+                    position={artist.location}
+                    icon={createCustomPin(artist.isOnline, artist.verified, selectedArtist?.id === artist.id)}
+                    eventHandlers={{
+                      click: () => handleMarkerClick(artist),
+                    }}
+                  >
+                    <Popup>
+                      <div style={{ color: '#333', minWidth: '200px' }}>
+                        <div style={{ fontWeight: 'bold', marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                          {artist.name}
+                          {artist.verified && <IconCheck size={14} style={{ color: '#00FF88' }} />}
                         </div>
-                      </foreignObject>
-                    )}
-                  </g>
+                        <div style={{ marginBottom: '6px', color: '#666' }}>{artist.specialty}</div>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
+                          <IconStar size={14} style={{ color: '#FFD700' }} />
+                          <span>{artist.rating}</span>
+                          <span style={{ color: '#666' }}>({artist.reviews} reviews)</span>
+                        </div>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
+                          <IconMapPin size={14} style={{ color: '#8A2BE2' }} />
+                          <span>{artist.distance}</span>
+                        </div>
+                        <div style={{ color: '#8A2BE2', fontWeight: 'bold' }}>{artist.hourlyRate}</div>
+                      </div>
+                    </Popup>
+                  </Marker>
                 ))}
-              </svg>
+              </MapContainer>
             </div>
 
             <div className="map-controls">
@@ -321,26 +339,47 @@ const LocalDemo: React.FC = () => {
                   <div className="legend-marker offline"></div>
                   <span>Offline</span>
                 </div>
+                {userLocation && (
+                  <div className="legend-item">
+                    <div className="legend-marker user-location"></div>
+                    <span>Your Location</span>
+                  </div>
+                )}
               </div>
             </div>
           </div>
 
           <div className="artists-sidebar">
             <div className="sidebar-header">
-              <h3>Local Artists ({artists.length})</h3>
+              <h3>Local Artists ({filteredArtists.length})</h3>
               <div className="filter-buttons">
-                <button className="filter-btn active">All</button>
-                <button className="filter-btn">Available</button>
-                <button className="filter-btn">Top Rated</button>
+                <button 
+                  className={`filter-btn ${activeFilter === 'all' ? 'active' : ''}`}
+                  onClick={() => handleFilterChange('all')}
+                >
+                  All
+                </button>
+                <button 
+                  className={`filter-btn ${activeFilter === 'available' ? 'active' : ''}`}
+                  onClick={() => handleFilterChange('available')}
+                >
+                  Available
+                </button>
+                <button 
+                  className={`filter-btn ${activeFilter === 'top-rated' ? 'active' : ''}`}
+                  onClick={() => handleFilterChange('top-rated')}
+                >
+                  Top Rated
+                </button>
               </div>
             </div>
 
             <div className="artists-list">
-              {artists.map((artist) => (
+              {filteredArtists.map((artist) => (
                 <div
                   key={artist.id}
                   className={`artist-card ${selectedArtist?.id === artist.id ? 'selected' : ''}`}
-                  onClick={() => handleMarkerClick(artist)}
+                  onClick={() => handleArtistCardClick(artist)}
                 >
                   <div className="artist-avatar">
                     <div className="avatar-placeholder">
@@ -350,7 +389,12 @@ const LocalDemo: React.FC = () => {
                   </div>
                   
                   <div className="artist-info">
-                    <div className="artist-name">{artist.name}</div>
+                    <div className="artist-name">
+                      {artist.name}
+                      {artist.verified && (
+                        <IconCheck size={16} style={{ color: '#00FF88', marginLeft: '6px' }} />
+                      )}
+                    </div>
                     <div className="artist-specialty">{artist.specialty}</div>
                     <div className="artist-stats">
                       <div className="stat">

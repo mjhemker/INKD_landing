@@ -3,7 +3,6 @@ import {
   IconSearch, 
   IconMessages, 
   IconHeart,
-  IconPalette,
   IconCalendar,
   IconUsers,
   IconBrain,

@@ -8,7 +8,6 @@ import {
   IconRocket,
   IconTarget,
   IconBolt,
-  IconArrowRight,
   IconStar
 } from '@tabler/icons-react';
 import './Features.css';

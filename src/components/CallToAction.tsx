@@ -104,7 +104,7 @@ const CallToAction: React.FC = () => {
         <div className="cta-content">
           <h2 className="cta-title">Ready to Transform Your Local Tattoo Experience?</h2>
           <p className="cta-subtitle">
-            Join thousands of local artists and clients who are already using INKD to create amazing tattoo experiences in their communities.
+            Join local artists and clients from across the country who are already signed up for INKD to create amazing tattoo experiences in their communities.
           </p>
           
           <div className="user-type-selector">
@@ -172,20 +172,6 @@ const CallToAction: React.FC = () => {
             </p>
           </form>
           
-          <div className="cta-features">
-            <div className="feature-item">
-              <IconPalette size={20} className="feature-icon" />
-              <span className="feature-text">Join the creative community</span>
-            </div>
-            <div className="feature-item">
-              <IconBolt size={20} className="feature-icon" />
-              <span className="feature-text">Be among the first to experience</span>
-            </div>
-            <div className="feature-item">
-              <IconRocket size={20} className="feature-icon" />
-              <span className="feature-text">Shape the future of tattoos</span>
-            </div>
-          </div>
         </div>
       </div>
     </section>

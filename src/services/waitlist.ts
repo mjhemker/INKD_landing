@@ -5,11 +5,12 @@ interface WaitlistEntry {
 }
 
 export const addToWaitlist = async (email: string, userType: 'client' | 'artist'): Promise<boolean> => {
-  const webAppUrl = process.env.REACT_APP_WAITLIST_ENDPOINT;
+  const webAppUrl = process.env.REACT_APP_WAITLIST_ENDPOINT || 'https://script.google.com/macros/s/AKfycbzmYf1vcuUT31NqYQJhuz7CHo6LI1HB_UHghOtjWSuaI6S1AVoRtT5QvxpFT4IwFUcsqw/exec';
   
   console.log('Environment check:', {
     hasUrl: !!webAppUrl,
     url: webAppUrl,
+    fromEnv: !!process.env.REACT_APP_WAITLIST_ENDPOINT,
     allEnv: Object.keys(process.env).filter(k => k.startsWith('REACT_APP'))
   });
   
